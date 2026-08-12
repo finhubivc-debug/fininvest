@@ -3,209 +3,1852 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F.I-STOCK - Vietnam Stock Market</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<title>FININVEST - Thông tin & Cơ hội đầu tư</title>
+
+<meta name="description"
+content="FININVEST - Tin tức thị trường, phân tích, khuyến nghị và kiến thức đầu tư.">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;background:#0f1116;color:#d1d4dc;overflow-x:hidden}
-button,input,select{font-family:inherit}button{cursor:pointer}
-.header{height:64px;background:#131722;border-bottom:1px solid #2a2e39;display:flex;align-items:center;padding:0 20px;gap:20px;position:sticky;top:0;z-index:1000}
-.logo{font-size:20px;font-weight:700;color:#26a69a;white-space:nowrap}.logo span{color:#fff}
-.search-box{width:280px;position:relative}.search-box input{width:100%;height:38px;background:#1e222d;border:1px solid #363a45;border-radius:6px;padding:0 40px 0 14px;color:#fff;outline:none}.search-box input:focus{border-color:#2962ff}.search-icon{position:absolute;right:12px;top:10px;color:#787d8a}
-.header-market{display:flex;gap:10px;overflow:hidden}.market-mini{background:#1e222d;border-radius:5px;padding:7px 12px;min-width:110px}.market-mini .name{font-size:11px;color:#8b909d}.market-mini .value{font-size:14px;margin-top:3px}
-.up{color:#26a69a!important}.down{color:#ef5350!important}.flat{color:#b0b3b8!important}
-.header-actions{margin-left:auto;display:flex;gap:8px}.icon-btn{width:38px;height:38px;border:1px solid #363a45;background:#1e222d;color:#d1d4dc;border-radius:6px}.login-btn{height:38px;padding:0 16px;background:#2962ff;color:#fff;border:0;border-radius:5px}
-.app{display:grid;grid-template-columns:250px 1fr 300px;min-height:calc(100vh - 64px)}
-.sidebar{background:#131722;border-right:1px solid #2a2e39;padding:16px 12px}.sidebar-title{color:#787d8a;font-size:11px;text-transform:uppercase;margin:15px 10px 8px}.sidebar-item{padding:10px 12px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;color:#b7bac2;font-size:14px;margin-bottom:3px}.sidebar-item:hover,.sidebar-item.active{background:#1e222d;color:#fff}.sidebar-item .count{font-size:11px;background:#2a2e39;padding:2px 6px;border-radius:10px}.industry{cursor:pointer}
-.main{min-width:0;background:#0f1116}.toolbar{min-height:54px;border-bottom:1px solid #2a2e39;display:flex;align-items:center;gap:8px;padding:8px 14px;flex-wrap:wrap}.symbol-title{font-size:21px;font-weight:600;color:#fff}.symbol-exchange{font-size:11px;color:#787d8a}.toolbar-btn{background:#1e222d;border:1px solid #30343f;color:#b8bbc3;padding:7px 10px;border-radius:4px;font-size:12px}.toolbar-btn.active{background:#2962ff;border-color:#2962ff;color:#fff}.spacer{flex:1}
-.chart-wrapper{height:480px;border-bottom:1px solid #2a2e39;position:relative}.chart-header{height:48px;padding:10px 15px;display:flex;align-items:center;gap:15px}.chart-price{font-size:22px;font-weight:600;color:#fff}.chart-change{font-size:14px}.chart-container{height:410px;padding:0 12px 10px}
-.quick-filter{border-bottom:1px solid #2a2e39;padding:12px 14px;display:flex;gap:7px;flex-wrap:wrap}.filter-title{font-size:12px;color:#787d8a;margin-right:4px;display:flex;align-items:center}.filter{background:#1e222d;color:#b7bac2;border:1px solid #30343f;border-radius:15px;padding:6px 12px;font-size:11px}.filter.active{background:#2962ff;border-color:#2962ff;color:#fff}
-.table-section{padding:15px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h3{color:#fff;font-size:15px}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:right;color:#6f7480;font-weight:normal;padding:9px 6px;border-bottom:1px solid #2a2e39}.table th:first-child,.table td:first-child{text-align:left}.table td{padding:10px 6px;border-bottom:1px solid #20232c;text-align:right}.table tr:hover{background:#171a23}.stock-code{font-weight:700;color:#fff}.star{color:#555b66;margin-right:6px;cursor:pointer}.star.active{color:#f5c542}
-.right-panel{background:#131722;border-left:1px solid #2a2e39}.panel{border-bottom:1px solid #2a2e39;padding:15px}.panel h3{font-size:14px;color:#fff;margin-bottom:13px}.watch-item{display:grid;grid-template-columns:1fr auto;padding:9px 0;border-bottom:1px solid #20232c}.watch-name{color:#fff;font-weight:600}.watch-price{text-align:right}.watch-change{font-size:11px;margin-top:3px}
-.ai-card{background:#1a1e27;border:1px solid #30343f;border-radius:8px;padding:14px}.ai-score{display:flex;align-items:center;gap:14px}.score-circle{width:70px;height:70px;border-radius:50%;border:5px solid #26a69a;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;color:#26a69a}.score-label{font-size:11px;color:#777d89}.score-text{font-size:15px;color:#fff;margin-top:4px}.ai-bars{margin-top:15px}.ai-row{margin-bottom:9px}.ai-row-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}.progress{height:5px;background:#2a2e39;border-radius:5px;overflow:hidden}.progress span{display:block;height:100%;background:#26a69a}
-.portfolio-value{font-size:22px;color:#fff;font-weight:bold}.portfolio-label{color:#787d8a;font-size:11px;margin-bottom:4px}.portfolio-profit{margin-top:5px;font-size:13px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:3000}.modal.show{display:flex}.modal-box{width:400px;max-width:92%;background:#1e222d;border:1px solid #363a45;border-radius:10px;padding:25px}.modal-box h2{color:#fff;margin-bottom:20px}.form-group{margin-bottom:14px}.form-group label{display:block;font-size:12px;color:#8a8f9b;margin-bottom:6px}.form-group input,.form-group select{width:100%;height:42px;border-radius:5px;border:1px solid #363a45;background:#131722;color:#fff;padding:0 12px;outline:none}.form-submit{width:100%;height:42px;border:0;background:#2962ff;color:#fff;border-radius:5px;margin-top:8px}.close-modal{float:right;color:#888;cursor:pointer;font-size:20px}
-@media(max-width:1100px){.app{grid-template-columns:210px 1fr}.right-panel{display:none}}
-@media(max-width:750px){.header{padding:0 10px;gap:8px}.logo{font-size:16px}.search-box{width:150px}.header-market{display:none}.app{display:block}.sidebar{display:none}.chart-wrapper{height:400px}.chart-container{height:330px}.toolbar{overflow-x:auto;flex-wrap:nowrap}.symbol-title{font-size:18px}.table-section{overflow-x:auto}.table{min-width:700px}}
-::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:#131722}::-webkit-scrollbar-thumb{background:#363a45;border-radius:10px}
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --navy:#071a2b;
+    --navy2:#0d2941;
+    --green:#07865f;
+    --green2:#0ca875;
+    --red:#d94343;
+    --yellow:#d99b22;
+    --bg:#f4f6f8;
+    --white:#ffffff;
+    --text:#182532;
+    --muted:#71808d;
+    --border:#e3e8ec;
+}
+
+body{
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    max-width:1280px;
+    margin:auto;
+    padding:0 20px;
+}
+
+/* =====================================================
+   TOP MARKET BAR
+===================================================== */
+
+.market-bar{
+    background:#061521;
+    color:#fff;
+    height:42px;
+    overflow:hidden;
+}
+
+.market-inner{
+    max-width:1500px;
+    margin:auto;
+    height:42px;
+    display:flex;
+    align-items:center;
+}
+
+.market-title{
+    min-width:125px;
+    font-size:11px;
+    font-weight:bold;
+    color:#8fa4b3;
+    padding-left:15px;
+}
+
+.market-scroll{
+    display:flex;
+    height:100%;
+    align-items:center;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.market-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:0 17px;
+    border-left:1px solid rgba(255,255,255,.08);
+    font-size:11px;
+}
+
+.market-code{
+    font-weight:bold;
+}
+
+.market-price{
+    font-weight:bold;
+}
+
+.market-up{
+    color:#2bd29a;
+}
+
+.market-down{
+    color:#ff6666;
+}
+
+.market-neutral{
+    color:#e1b74b;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    height:76px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.header-inner{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-mark{
+    width:38px;
+    height:38px;
+    background:var(--navy);
+    color:#fff;
+    border-radius:7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo-name{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.logo-name span{
+    color:var(--green);
+}
+
+.nav{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.nav a{
+    font-size:14px;
+    font-weight:600;
+    color:#394957;
+}
+
+.nav a:hover{
+    color:var(--green);
+}
+
+.header-search{
+    width:190px;
+    height:38px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    padding:0 12px;
+}
+
+.menu-btn{
+    display:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* =====================================================
+   HERO NEWS
+===================================================== */
+
+.hero{
+    background:#fff;
+    padding:28px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.hero-main{
+    height:430px;
+    position:relative;
+    border-radius:5px;
+    overflow:hidden;
+    background:
+    linear-gradient(
+        rgba(4,20,34,.1),
+        rgba(4,20,34,.88)
+    ),
+    linear-gradient(135deg,#305a73,#0a1e30);
+    color:#fff;
+    display:flex;
+    align-items:flex-end;
+    padding:35px;
+}
+
+.hero-main-content{
+    max-width:720px;
+}
+
+.category{
+    color:var(--green2);
+    font-size:11px;
+    font-weight:bold;
+    text-transform:uppercase;
+    margin-bottom:9px;
+}
+
+.hero-main h1{
+    font-size:35px;
+    line-height:1.15;
+    margin-bottom:12px;
+}
+
+.hero-main p{
+    color:#d2dce3;
+    font-size:14px;
+}
+
+.hero-side{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.side-news{
+    height:205px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.side-image{
+    height:100px;
+    background:
+    linear-gradient(135deg,#dce6eb,#839aa8);
+}
+
+.side-content{
+    padding:12px 15px;
+}
+
+.side-content h3{
+    font-size:15px;
+    line-height:1.35;
+}
+
+/* =====================================================
+   NEWS SECTION
+===================================================== */
+
+.section{
+    padding:50px 0;
+}
+
+.section-title{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.section-desc{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:22px;
+}
+
+.more{
+    color:var(--green);
+    font-weight:bold;
+    font-size:12px;
+}
+
+.news-layout{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.news-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.news-img{
+    height:170px;
+    background:
+    linear-gradient(135deg,#d9e4e9,#8da2af);
+}
+
+.news-body{
+    padding:16px;
+}
+
+.news-body h3{
+    font-size:16px;
+    line-height:1.35;
+    margin:6px 0;
+}
+
+.news-body p{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.news-time{
+    color:var(--green);
+    font-size:10px;
+    font-weight:bold;
+}
+
+.latest{
+    background:#fff;
+    border:1px solid var(--border);
+    padding:18px;
+}
+
+.latest h3{
+    font-size:17px;
+    padding-bottom:13px;
+    border-bottom:2px solid var(--navy);
+}
+
+.latest-item{
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.latest-item:last-child{
+    border-bottom:0;
+}
+
+.latest-item span{
+    font-size:10px;
+    color:var(--green);
+}
+
+.latest-item h4{
+    font-size:13px;
+    line-height:1.4;
+    margin-top:3px;
+}
+
+/* =====================================================
+   INVESTMENT RECOMMENDATION
+===================================================== */
+
+.recommend-section{
+    background:#fff;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.recommend-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.recommend-card{
+    border:1px solid var(--border);
+    background:#fff;
+    padding:20px;
+    border-radius:5px;
+}
+
+.recommend-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stock-code{
+    font-size:25px;
+    font-weight:800;
+}
+
+.rating{
+    font-size:11px;
+    font-weight:bold;
+    padding:5px 9px;
+    border-radius:4px;
+    background:#e9f8f2;
+    color:var(--green);
+}
+
+.recommend-card h3{
+    margin:15px 0 5px;
+    font-size:17px;
+}
+
+.recommend-card p{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.price-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+}
+
+.price{
+    font-size:19px;
+    font-weight:bold;
+}
+
+.target{
+    color:var(--green);
+    font-weight:bold;
+}
+
+.recommend-label{
+    margin-top:15px;
+    padding:8px 10px;
+    background:#f6f8fa;
+    font-size:11px;
+    color:#52616d;
+}
+
+/* =====================================================
+   MARKET OPPORTUNITY
+===================================================== */
+
+.opportunity{
+    background:var(--navy);
+    color:#fff;
+}
+
+.opportunity .section-desc{
+    color:#9cafbb;
+}
+
+.opportunity-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.opportunity-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    padding:22px;
+    border-radius:5px;
+}
+
+.opportunity-icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.opportunity-card h3{
+    font-size:16px;
+}
+
+.opportunity-card p{
+    font-size:12px;
+    color:#9fb0bc;
+    margin-top:6px;
+}
+
+/* =====================================================
+   EDUCATION
+===================================================== */
+
+.education-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:18px;
+}
+
+.education-card{
+    background:#fff;
+    border:1px solid var(--border);
+    padding:25px;
+    border-radius:5px;
+}
+
+.education-number{
+    font-size:35px;
+    font-weight:800;
+    color:#dfe5e9;
+}
+
+.education-card h3{
+    font-size:18px;
+    margin:10px 0;
+}
+
+.education-card p{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.education-link{
+    display:inline-block;
+    margin-top:18px;
+    color:var(--green);
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* =====================================================
+   OPEN ACCOUNT CTA
+===================================================== */
+
+.account{
+    padding:60px 0;
+}
+
+.account-box{
+    background:
+    linear-gradient(135deg,#0b273d,#092033);
+    color:#fff;
+    padding:55px;
+    border-radius:7px;
+    display:grid;
+    grid-template-columns:1.4fr .6fr;
+    align-items:center;
+    gap:30px;
+}
+
+.account-box h2{
+    font-size:32px;
+    line-height:1.2;
+}
+
+.account-box p{
+    color:#a9bbc7;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.account-button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:50px;
+    background:var(--green);
+    color:#fff;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    background:#061520;
+    color:#fff;
+    padding:50px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:35px;
+}
+
+.footer h4{
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.footer a,
+.footer p{
+    color:#8398a6;
+    display:block;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.08);
+    margin-top:40px;
+    padding-top:20px;
+    color:#637886;
+    font-size:10px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .nav{
+        display:none;
+    }
+
+    .header-search{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid,
+    .news-layout{
+        grid-template-columns:1fr;
+    }
+
+    .recommend-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .opportunity-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .market-title{
+        display:none;
+    }
+
+    .market-item{
+        padding:0 10px;
+    }
+
+    .hero-main{
+        height:350px;
+        padding:22px;
+    }
+
+    .hero-main h1{
+        font-size:27px;
+    }
+
+    .news-grid{
+        grid-template-columns:1fr;
+    }
+
+    .recommend-grid,
+    .education-grid{
+        grid-template-columns:1fr;
+    }
+
+    .opportunity-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .account-box{
+        grid-template-columns:1fr;
+        padding:35px 25px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .opportunity-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-main{
+        height:320px;
+    }
+
+}
+
 </style>
 </head>
+
+
 <body>
 
-<header class="header">
-<div class="logo">FI<span>STOCK</span></div>
-<div class="search-box"><input type="text" id="searchInput" placeholder="Tìm mã cổ phiếu..." onkeyup="searchStock()"><span class="search-icon">⌕</span></div>
-<div class="header-market">
-<div class="market-mini"><div class="name">VN-INDEX</div><div class="value up">1,563.91 ▲ 0.82%</div></div>
-<div class="market-mini"><div class="name">VN30</div><div class="value up">1,721.24 ▲ 0.76%</div></div>
-<div class="market-mini"><div class="name">HNX</div><div class="value down">257.31 ▼ 0.21%</div></div>
-<div class="market-mini"><div class="name">UPCOM</div><div class="value up">102.18 ▲ 0.35%</div></div>
+
+<!-- =====================================================
+     MARKET DATA BAR
+     KẾT NỐI API VNDIRECT Ở ĐÂY
+===================================================== -->
+
+<div class="market-bar">
+
+<div class="market-inner">
+
+<div class="market-title">
+THỊ TRƯỜNG
 </div>
-<div class="header-actions"><button class="icon-btn" onclick="showAlert()">🔔</button><button class="login-btn" onclick="openModal()">Đăng ký</button></div>
+
+<div class="market-scroll" id="marketData">
+
+<div class="market-item">
+<span class="market-code">VN-INDEX</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">VN30</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">HNX</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">UPCOM</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">FPT</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">VCB</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">HPG</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+<div class="market-item">
+<span class="market-code">SSI</span>
+<span class="market-price">--</span>
+<span class="market-up">--</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="container header-inner">
+
+<a href="#" class="logo">
+
+<div class="logo-mark">
+F
+</div>
+
+<div class="logo-name">
+FIN<span>INVEST</span>
+</div>
+
+</a>
+
+
+<nav class="nav">
+
+<a href="#news">
+Tin tức
+</a>
+
+<a href="#recommend">
+Khuyến nghị
+</a>
+
+<a href="#opportunity">
+Cơ hội đầu tư
+</a>
+
+<a href="#education">
+Hướng dẫn đầu tư
+</a>
+
+<a href="#courses">
+Khóa học
+</a>
+
+</nav>
+
+
+<input
+class="header-search"
+placeholder="Tìm kiếm..."
+>
+
+
+<div class="menu-btn"
+onclick="mobileMenu()">
+☰
+</div>
+
+</div>
+
 </header>
 
-<div class="app">
-<aside class="sidebar">
-<div class="sidebar-title">Thị trường</div>
-<div class="sidebar-item active"><span>📊 Tổng quan</span></div>
-<div class="sidebar-item"><span>🔥 Top tăng giá</span></div>
-<div class="sidebar-item"><span>🔻 Top giảm giá</span></div>
-<div class="sidebar-item"><span>💰 Thanh khoản cao</span></div>
-<div class="sidebar-item"><span>📈 Breakout</span></div>
-<div class="sidebar-title">Danh mục ngành</div>
-<div class="sidebar-item industry" onclick="filterIndustry('Ngân hàng')"><span>🏦 Ngân hàng</span><span class="count">27</span></div>
-<div class="sidebar-item industry" onclick="filterIndustry('Chứng khoán')"><span>💹 Chứng khoán</span><span class="count">24</span></div>
-<div class="sidebar-item industry" onclick="filterIndustry('Bất động sản')"><span>🏢 Bất động sản</span><span class="count">48</span></div>
-<div class="sidebar-item industry" onclick="filterIndustry('Thép')"><span>🏭 Thép</span><span class="count">18</span></div>
-<div class="sidebar-item industry" onclick="filterIndustry('Công nghệ')"><span>💻 Công nghệ</span><span class="count">16</span></div>
-<div class="sidebar-item industry" onclick="filterIndustry('Dầu khí')"><span>🛢️ Dầu khí</span><span class="count">13</span></div>
-<div class="sidebar-title">Cá nhân</div>
-<div class="sidebar-item"><span>⭐ Watchlist</span></div>
-<div class="sidebar-item"><span>💼 Danh mục</span></div>
-<div class="sidebar-item"><span>🔔 Cảnh báo</span></div>
-</aside>
 
-<main class="main">
-<div class="toolbar">
-<div><div class="symbol-title" id="currentSymbol">FPT</div><div class="symbol-exchange">HOSE · Công nghệ</div></div>
-<button class="toolbar-btn active" onclick="setTimeframe('1D',this)">1D</button>
-<button class="toolbar-btn" onclick="setTimeframe('1W',this)">1W</button>
-<button class="toolbar-btn" onclick="setTimeframe('1M',this)">1M</button>
-<button class="toolbar-btn" onclick="setTimeframe('3M',this)">3M</button>
-<button class="toolbar-btn" onclick="setTimeframe('1Y',this)">1Y</button>
-<div class="spacer"></div><button class="toolbar-btn">MA</button><button class="toolbar-btn">RSI</button><button class="toolbar-btn">MACD</button>
+<!-- =====================================================
+     TRANG CHỦ - TIN NỔI BẬT
+===================================================== -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="hero-grid">
+
+
+<!-- TIN CHÍNH -->
+
+<article class="hero-main">
+
+<div class="hero-main-content">
+
+<div class="category">
+THỊ TRƯỜNG
 </div>
 
-<section class="chart-wrapper">
-<div class="chart-header"><div class="chart-price" id="chartPrice">128.50</div><div class="chart-change up" id="chartChange">+2.50 (+1.98%)</div></div>
-<div class="chart-container"><canvas id="stockChart"></canvas></div>
+<h1>
+Thị trường chứng khoán:
+Dòng tiền đang tìm kiếm cơ hội ở đâu?
+</h1>
+
+<p>
+Cập nhật diễn biến thị trường, dòng tiền,
+nhóm ngành nổi bật và những yếu tố có thể
+ảnh hưởng đến xu hướng đầu tư.
+</p>
+
+</div>
+
+</article>
+
+
+<!-- TIN BÊN PHẢI -->
+
+<div class="hero-side">
+
+
+<article class="side-news">
+
+<div class="side-image"></div>
+
+<div class="side-content">
+
+<div class="category">
+DOANH NGHIỆP
+</div>
+
+<h3>
+Những doanh nghiệp đáng chú ý trong mùa công bố kết quả kinh doanh
+</h3>
+
+</div>
+
+</article>
+
+
+<article class="side-news">
+
+<div class="side-image"></div>
+
+<div class="side-content">
+
+<div class="category">
+VĨ MÔ
+</div>
+
+<h3>
+Lãi suất, tỷ giá và những tác động đến thị trường chứng khoán
+</h3>
+
+</div>
+
+</article>
+
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<div class="quick-filter">
-<div class="filter-title">Bộ lọc nhanh:</div>
-<button class="filter active" onclick="quickFilter('all',this)">Tất cả</button>
-<button class="filter" onclick="quickFilter('up',this)">🚀 Tăng mạnh</button>
-<button class="filter" onclick="quickFilter('down',this)">🔻 Giảm mạnh</button>
-<button class="filter" onclick="quickFilter('volume',this)">💰 Thanh khoản</button>
-<button class="filter" onclick="quickFilter('breakout',this)">📈 Breakout</button>
-<button class="filter" onclick="quickFilter('dividend',this)">💵 Giá thấp</button>
+
+<!-- =====================================================
+     TIN TỨC
+===================================================== -->
+
+<section class="section"
+id="news">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2 class="section-title">
+Tin tức thị trường
+</h2>
+
+<p class="section-desc">
+Thông tin tài chính được cập nhật và chọn lọc.
+</p>
+
 </div>
 
-<section class="table-section">
-<div class="section-title"><h3>Danh sách cổ phiếu</h3><span style="font-size:11px;color:#777">Dữ liệu mẫu</span></div>
-<table class="table"><thead><tr><th>Mã</th><th>Giá</th><th>+/-</th><th>%</th><th>TC</th><th>KL</th><th>GTGD</th><th>Ngành</th></tr></thead><tbody id="stockTable"></tbody></table>
-</section>
-</main>
+<a class="more" href="#">
+Xem tất cả →
+</a>
 
-<aside class="right-panel">
-<div class="panel"><h3>⭐ Watchlist</h3><div id="watchlist"></div></div>
-<div class="panel"><h3>🤖 AI Stock Score</h3><div class="ai-card"><div class="ai-score"><div class="score-circle">86</div><div><div class="score-label">Đánh giá FPT</div><div class="score-text">TÍCH CỰC</div></div></div><div class="ai-bars">
-<div class="ai-row"><div class="ai-row-top"><span>Xu hướng</span><span>91%</span></div><div class="progress"><span style="width:91%"></span></div></div>
-<div class="ai-row"><div class="ai-row-top"><span>Tài chính</span><span>88%</span></div><div class="progress"><span style="width:88%"></span></div></div>
-<div class="ai-row"><div class="ai-row-top"><span>Định giá</span><span>76%</span></div><div class="progress"><span style="width:76%"></span></div></div>
-<div class="ai-row"><div class="ai-row-top"><span>Thanh khoản</span><span>94%</span></div><div class="progress"><span style="width:94%"></span></div></div>
-</div></div></div>
-<div class="panel"><h3>💼 Danh mục đầu tư</h3><div class="portfolio-label">Tổng giá trị</div><div class="portfolio-value">1.250.000.000 ₫</div><div class="portfolio-profit up">+82.500.000 ₫ (+7.06%)</div></div>
-<div class="panel"><h3>🌐 Thị trường</h3>
-<div class="watch-item"><div>VN-Index</div><div class="watch-price up">1,563.91</div></div>
-<div class="watch-item"><div>VN30</div><div class="watch-price up">1,721.24</div></div>
-<div class="watch-item"><div>HNX</div><div class="watch-price down">257.31</div></div>
-<div class="watch-item"><div>UPCOM</div><div class="watch-price up">102.18</div></div>
 </div>
+
+
+<div class="news-layout">
+
+
+<div class="news-grid">
+
+
+<article class="news-card">
+
+<div class="news-img"></div>
+
+<div class="news-body">
+
+<div class="news-time">
+THỊ TRƯỜNG · 10 PHÚT TRƯỚC
+</div>
+
+<h3>
+VN-INDEX biến động mạnh, nhóm vốn hóa lớn phân hóa
+</h3>
+
+<p>
+Thanh khoản và diễn biến dòng tiền đang là những yếu tố được nhà đầu tư quan tâm.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="news-card">
+
+<div class="news-img"></div>
+
+<div class="news-body">
+
+<div class="news-time">
+DOANH NGHIỆP · 25 PHÚT TRƯỚC
+</div>
+
+<h3>
+Kết quả kinh doanh quý mới của các doanh nghiệp lớn
+</h3>
+
+<p>
+Những con số đáng chú ý và tác động đến triển vọng cổ phiếu.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="news-card">
+
+<div class="news-img"></div>
+
+<div class="news-body">
+
+<div class="news-time">
+VĨ MÔ · 1 GIỜ TRƯỚC
+</div>
+
+<h3>
+Tỷ giá và chính sách tiền tệ ảnh hưởng thế nào đến chứng khoán?
+</h3>
+
+<p>
+Góc nhìn tổng quan về các biến số kinh tế quan trọng.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="news-card">
+
+<div class="news-img"></div>
+
+<div class="news-body">
+
+<div class="news-time">
+NGÀNH · 2 GIỜ TRƯỚC
+</div>
+
+<h3>
+Nhóm ngành nào đang thu hút dòng tiền?
+</h3>
+
+<p>
+So sánh diễn biến giữa ngân hàng, chứng khoán, bất động sản và thép.
+</p>
+
+</div>
+
+</article>
+
+
+</div>
+
+
+<!-- LATEST -->
+
+<aside class="latest">
+
+<h3>
+MỚI NHẤT
+</h3>
+
+
+<div class="latest-item">
+
+<span>14:32</span>
+
+<h4>
+Khối ngoại thay đổi trạng thái giao dịch
+</h4>
+
+</div>
+
+
+<div class="latest-item">
+
+<span>14:05</span>
+
+<h4>
+Thanh khoản thị trường cải thiện
+</h4>
+
+</div>
+
+
+<div class="latest-item">
+
+<span>13:48</span>
+
+<h4>
+Nhóm ngân hàng tiếp tục dẫn dắt
+</h4>
+
+</div>
+
+
+<div class="latest-item">
+
+<span>13:20</span>
+
+<h4>
+Cổ phiếu vốn hóa lớn phân hóa
+</h4>
+
+</div>
+
+
+<div class="latest-item">
+
+<span>12:55</span>
+
+<h4>
+Nhà đầu tư cá nhân đang quan tâm nhóm nào?
+</h4>
+
+</div>
+
 </aside>
+
+
 </div>
 
-<div class="modal" id="loginModal">
-<div class="modal-box"><span class="close-modal" onclick="closeModal()">×</span><h2>Đăng ký tài khoản</h2>
-<div class="form-group"><label>Họ và tên</label><input type="text" id="customerName" placeholder="Nguyễn Văn A"></div>
-<div class="form-group"><label>Email</label><input type="email" id="customerEmail" placeholder="email@example.com"></div>
-<div class="form-group"><label>Số điện thoại</label><input type="tel" id="customerPhone" placeholder="09xxxxxxxx"></div>
-<div class="form-group"><label>Mật khẩu</label><input type="password" id="customerPassword" placeholder="••••••••"></div>
-<div class="form-group"><label>Gói tài khoản</label><select><option>Free - Miễn phí</option><option>Pro - 199.000đ/tháng</option><option>Premium - 499.000đ/tháng</option></select></div>
-<button class="form-submit" onclick="registerUser()">Đăng ký tài khoản</button>
 </div>
+
+</section>
+
+
+<!-- =====================================================
+     KHUYẾN NGHỊ ĐẦU TƯ
+===================================================== -->
+
+<section class="section recommend-section"
+id="recommend">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2 class="section-title">
+Khuyến nghị đầu tư
+</h2>
+
+<p class="section-desc">
+Các góc nhìn và phân tích được xây dựng dựa trên dữ liệu thị trường.
+</p>
+
 </div>
+
+<a class="more" href="#">
+Xem toàn bộ →
+</a>
+
+</div>
+
+
+<div class="recommend-grid">
+
+
+<!-- FPT -->
+
+<div class="recommend-card">
+
+<div class="recommend-top">
+
+<div class="stock-code">
+FPT
+</div>
+
+<div class="rating">
+QUAN TÂM
+</div>
+
+</div>
+
+<h3>
+Triển vọng tăng trưởng dài hạn
+</h3>
+
+<p>
+Công nghệ và chuyển đổi số tiếp tục là động lực tăng trưởng.
+</p>
+
+<div class="price-row">
+
+<div>
+Giá tham chiếu
+<br>
+<strong class="price">128.5</strong>
+</div>
+
+<div>
+Mục tiêu
+<br>
+<strong class="target">145.0</strong>
+</div>
+
+</div>
+
+<div class="recommend-label">
+Phân tích cơ bản · Trung dài hạn
+</div>
+
+</div>
+
+
+<!-- VCB -->
+
+<div class="recommend-card">
+
+<div class="recommend-top">
+
+<div class="stock-code">
+VCB
+</div>
+
+<div class="rating">
+THEO DÕI
+</div>
+
+</div>
+
+<h3>
+Nền tảng cơ bản ổn định
+</h3>
+
+<p>
+Chất lượng tài sản và vị thế trong hệ thống ngân hàng.
+</p>
+
+<div class="price-row">
+
+<div>
+Giá tham chiếu
+<br>
+<strong class="price">91.2</strong>
+</div>
+
+<div>
+Mục tiêu
+<br>
+<strong class="target">102.0</strong>
+</div>
+
+</div>
+
+<div class="recommend-label">
+Phân tích cơ bản · Trung hạn
+</div>
+
+</div>
+
+
+<!-- HPG -->
+
+<div class="recommend-card">
+
+<div class="recommend-top">
+
+<div class="stock-code">
+HPG
+</div>
+
+<div class="rating">
+QUAN TÂM
+</div>
+
+</div>
+
+<h3>
+Theo dõi chu kỳ ngành thép
+</h3>
+
+<p>
+Sản lượng, giá thép và nhu cầu xây dựng là những biến số quan trọng.
+</p>
+
+<div class="price-row">
+
+<div>
+Giá tham chiếu
+<br>
+<strong class="price">27.65</strong>
+</div>
+
+<div>
+Mục tiêu
+<br>
+<strong class="target">32.0</strong>
+</div>
+
+</div>
+
+<div class="recommend-label">
+Phân tích ngành · Trung hạn
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     TÌM KIẾM CƠ HỘI
+===================================================== -->
+
+<section class="section opportunity"
+id="opportunity">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2 class="section-title">
+Tìm kiếm cơ hội đầu tư
+</h2>
+
+<p class="section-desc">
+Khám phá thị trường theo nhiều góc nhìn khác nhau.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="opportunity-grid">
+
+
+<div class="opportunity-card">
+
+<div class="opportunity-icon">
+📈
+</div>
+
+<h3>
+Cổ phiếu tăng trưởng
+</h3>
+
+<p>
+Tìm doanh nghiệp có tốc độ tăng trưởng doanh thu và lợi nhuận tốt.
+</p>
+
+</div>
+
+
+<div class="opportunity-card">
+
+<div class="opportunity-icon">
+💰
+</div>
+
+<h3>
+Cổ phiếu giá trị
+</h3>
+
+<p>
+Tìm kiếm doanh nghiệp có nền tảng tốt và mức định giá hợp lý.
+</p>
+
+</div>
+
+
+<div class="opportunity-card">
+
+<div class="opportunity-icon">
+💎
+</div>
+
+<h3>
+Cổ tức
+</h3>
+
+<p>
+Khám phá các doanh nghiệp có lịch sử chi trả cổ tức ổn định.
+</p>
+
+</div>
+
+
+<div class="opportunity-card">
+
+<div class="opportunity-icon">
+🔥
+</div>
+
+<h3>
+Dòng tiền
+</h3>
+
+<p>
+Theo dõi những nhóm ngành và cổ phiếu đang thu hút thanh khoản.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     HƯỚNG DẪN + KHÓA HỌC
+===================================================== -->
+
+<section class="section"
+id="education">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+
+<h2 class="section-title">
+Học đầu tư cùng FININVEST
+</h2>
+
+<p class="section-desc">
+Từ những kiến thức đầu tiên đến phân tích chuyên sâu.
+</p>
+
+</div>
+
+<a class="more" href="#">
+Xem Academy →
+</a>
+
+</div>
+
+
+<div class="education-grid">
+
+
+<article class="education-card">
+
+<div class="education-number">
+01
+</div>
+
+<h3>
+Hướng dẫn đầu tư
+</h3>
+
+<p>
+Chứng khoán là gì? Cách đọc bảng giá,
+cách mở tài khoản, đặt lệnh và quản lý danh mục.
+</p>
+
+<a href="#" class="education-link">
+Bắt đầu học →
+</a>
+
+</article>
+
+
+<article class="education-card"
+id="courses">
+
+<div class="education-number">
+02
+</div>
+
+<h3>
+Khóa học đầu tư
+</h3>
+
+<p>
+Các chương trình học từ cơ bản đến nâng cao:
+phân tích doanh nghiệp, định giá và phân tích kỹ thuật.
+</p>
+
+<a href="#" class="education-link">
+Xem khóa học →
+</a>
+
+</article>
+
+
+<article class="education-card">
+
+<div class="education-number">
+03
+</div>
+
+<h3>
+Xây dựng chiến lược
+</h3>
+
+<p>
+Quản trị vốn, phân bổ tài sản,
+quản trị rủi ro và xây dựng danh mục.
+</p>
+
+<a href="#" class="education-link">
+Tìm hiểu thêm →
+</a>
+
+</article>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MỞ TÀI KHOẢN
+===================================================== -->
+
+<section class="account">
+
+<div class="container">
+
+<div class="account-box">
+
+<div>
+
+<h2>
+Sẵn sàng bắt đầu hành trình đầu tư?
+</h2>
+
+<p>
+Tìm hiểu thị trường, lựa chọn công ty chứng khoán
+phù hợp và mở tài khoản đầu tư trực tuyến.
+</p>
+
+</div>
+
+<a href="#"
+class="account-button">
+MỞ TÀI KHOẢN ĐẦU TƯ
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="footer-grid">
+
+
+<div>
+
+<div class="logo">
+
+<div class="logo-mark">
+F
+</div>
+
+<div class="logo-name"
+style="color:white">
+FIN<span>INVEST</span>
+</div>
+
+</div>
+
+<p style="margin-top:15px">
+Thông tin, dữ liệu và kiến thức
+đầu tư dành cho nhà đầu tư Việt Nam.
+</p>
+
+</div>
+
+
+<div>
+
+<h4>Thị trường</h4>
+
+<a href="#">VN-INDEX</a>
+<a href="#">VN30</a>
+<a href="#">HNX</a>
+<a href="#">UPCOM</a>
+<a href="#">Dòng tiền</a>
+
+</div>
+
+
+<div>
+
+<h4>Đầu tư</h4>
+
+<a href="#">Khuyến nghị</a>
+<a href="#">Cổ phiếu</a>
+<a href="#">Cơ hội đầu tư</a>
+<a href="#">Phân tích</a>
+
+</div>
+
+
+<div>
+
+<h4>Kiến thức</h4>
+
+<a href="#">Hướng dẫn đầu tư</a>
+<a href="#">Khóa học</a>
+<a href="#">Academy</a>
+<a href="#">Mở tài khoản</a>
+
+</div>
+
+
+</div>
+
+
+<div class="copyright">
+
+© 2026 FININVEST. All rights reserved.
+
+<br><br>
+
+Thông tin trên FININVEST nhằm mục đích cung cấp
+thông tin và kiến thức. Nội dung không cấu thành
+lời mời hoặc cam kết lợi nhuận đầu tư.
+
+</div>
+
+</div>
+
+</footer>
+
 
 <script>
-const stocks=[
-{code:"FPT",price:128.5,change:2.5,percent:1.98,volume:"5.21M",value:"668B",industry:"Công nghệ"},
-{code:"VCB",price:97.2,change:1.1,percent:1.14,volume:"3.12M",value:"303B",industry:"Ngân hàng"},
-{code:"TCB",price:36.8,change:-0.4,percent:-1.08,volume:"12.8M",value:"471B",industry:"Ngân hàng"},
-{code:"MBB",price:28.9,change:0.8,percent:2.85,volume:"22.4M",value:"646B",industry:"Ngân hàng"},
-{code:"SSI",price:31.5,change:1.3,percent:4.30,volume:"31.2M",value:"984B",industry:"Chứng khoán"},
-{code:"VND",price:18.9,change:0.9,percent:5.00,volume:"42.1M",value:"791B",industry:"Chứng khoán"},
-{code:"HPG",price:27.4,change:-0.6,percent:-2.14,volume:"19.5M",value:"534B",industry:"Thép"},
-{code:"VHM",price:82.4,change:1.4,percent:1.73,volume:"7.2M",value:"593B",industry:"Bất động sản"},
-{code:"VIC",price:108.2,change:3.2,percent:3.05,volume:"8.1M",value:"876B",industry:"Bất động sản"},
-{code:"GAS",price:74.6,change:-1.2,percent:-1.58,volume:"3.4M",value:"254B",industry:"Dầu khí"}
-];
 
-function renderTable(data=stocks){
-const table=document.getElementById("stockTable");table.innerHTML="";
-data.forEach(stock=>{
-const row=document.createElement("tr");
-const cls=stock.change>0?"up":stock.change<0?"down":"flat";
-row.innerHTML=`<td><span class="star" onclick="toggleStar(this)">☆</span><span class="stock-code" onclick="selectStock('${stock.code}')" style="cursor:pointer">${stock.code}</span></td>
-<td class="${cls}">${stock.price.toFixed(2)}</td><td class="${cls}">${stock.change>0?"+":""}${stock.change.toFixed(2)}</td>
-<td class="${cls}">${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%</td><td>${(stock.price-stock.change).toFixed(2)}</td>
-<td>${stock.volume}</td><td>${stock.value}</td><td>${stock.industry}</td>`;
-table.appendChild(row);
-});
+/* =====================================================
+   VNDIRECT DATA CONNECTION
+===================================================== */
+
+/*
+   KHÔNG ĐẶT API KEY TRỰC TIẾP TRONG INDEX.HTML.
+
+   Kiến trúc khuyến nghị:
+
+   VNDIRECT API
+        ↓
+   SERVER / API PROXY
+        ↓
+   /api/market
+        ↓
+   FININVEST INDEX.HTML
+
+   Khi backend sẵn sàng,
+   thay URL dưới đây bằng endpoint của anh.
+*/
+
+
+async function loadMarketData(){
+
+    try{
+
+        const response =
+        await fetch("/api/market");
+
+        if(!response.ok){
+            throw new Error(
+                "Market API unavailable"
+            );
+        }
+
+        const data =
+        await response.json();
+
+        updateMarketUI(data);
+
+    }catch(error){
+
+        console.log(
+            "Chưa kết nối Market API:",
+            error.message
+        );
+
+    }
+
 }
-function renderWatchlist(){
-const list=document.getElementById("watchlist");const selected=["FPT","VCB","SSI","HPG","VIC"];list.innerHTML="";
-selected.forEach(code=>{const stock=stocks.find(x=>x.code===code);if(!stock)return;const cls=stock.change>0?"up":"down";
-list.innerHTML+=`<div class="watch-item"><div><div class="watch-name">${stock.code}</div><div style="font-size:10px;color:#707580">${stock.industry}</div></div><div><div class="watch-price ${cls}">${stock.price.toFixed(2)}</div><div class="watch-change ${cls}">${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%</div></div></div>`;
-});
+
+
+function updateMarketUI(data){
+
+    /*
+       Ví dụ data:
+
+       {
+          "VNINDEX":{
+             "price":1284.56,
+             "change":0.66
+          },
+          "VN30":{
+             "price":1362.84,
+             "change":0.82
+          }
+       }
+    */
+
+    const items =
+    document.querySelectorAll(
+        ".market-item"
+    );
+
+    items.forEach(item => {
+
+        const code =
+        item.querySelector(
+            ".market-code"
+        ).innerText;
+
+        if(!data[code]) return;
+
+        item.querySelector(
+            ".market-price"
+        ).innerText =
+        data[code].price;
+
+        const change =
+        data[code].change;
+
+        const changeElement =
+        item.querySelector(
+            ".market-up"
+        );
+
+        changeElement.innerText =
+        (change >= 0 ? "+" : "") +
+        change +
+        "%";
+
+        changeElement.className =
+        change >= 0
+        ? "market-up"
+        : "market-down";
+
+    });
+
 }
-let chart;
-function generateChart(){
-const ctx=document.getElementById("stockChart");const labels=[],values=[];let price=112;
-for(let i=0;i<80;i++){labels.push(i);price+=(Math.random()-.45)*2.2;values.push(Number(price.toFixed(2)))}
-chart=new Chart(ctx,{type:"line",data:{labels,datasets:[{label:"FPT",data:values,borderWidth:2,pointRadius:0,tension:.2,fill:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:"index"},plugins:{legend:{display:false}},scales:{x:{grid:{color:"#20232c"},ticks:{color:"#626774",maxTicksLimit:8}},y:{position:"right",grid:{color:"#20232c"},ticks:{color:"#626774"}}}}});
+
+
+/*
+   Cập nhật dữ liệu mỗi 10 giây
+*/
+
+setInterval(
+    loadMarketData,
+    10000
+);
+
+
+/*
+   Load lần đầu
+*/
+
+loadMarketData();
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+function mobileMenu(){
+
+    const nav =
+    document.querySelector(".nav");
+
+    if(nav.style.display === "flex"){
+
+        nav.style.display = "";
+
+    }else{
+
+        nav.style.display = "flex";
+
+        nav.style.position = "absolute";
+
+        nav.style.top = "76px";
+
+        nav.style.left = "0";
+
+        nav.style.right = "0";
+
+        nav.style.background = "#fff";
+
+        nav.style.padding = "20px";
+
+        nav.style.flexDirection = "column";
+
+        nav.style.borderBottom =
+        "1px solid #e3e8ec";
+
+    }
+
 }
-function selectStock(code){
-const stock=stocks.find(x=>x.code===code);if(!stock)return;
-document.getElementById("currentSymbol").innerText=stock.code;
-document.getElementById("chartPrice").innerText=stock.price.toFixed(2);
-const change=document.getElementById("chartChange");
-change.innerText=`${stock.change>0?"+":""}${stock.change.toFixed(2)} (${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%)`;
-change.className="chart-change "+(stock.change>0?"up":"down");
-updateChart(stock);
-}
-function updateChart(stock){
-if(!chart)return;const values=[];let price=stock.price*.9;
-for(let i=0;i<80;i++){price+=(Math.random()-.45)*stock.price*.015;values.push(Number(price.toFixed(2)))}values[79]=stock.price;
-chart.data.datasets[0].label=stock.code;chart.data.datasets[0].data=values;chart.update();
-}
-function setTimeframe(time,button){
-document.querySelectorAll(".toolbar-btn").forEach(btn=>{if(["1D","1W","1M","3M","1Y"].includes(btn.innerText))btn.classList.remove("active")});
-button.classList.add("active");
-}
-function filterIndustry(industry){renderTable(stocks.filter(x=>x.industry===industry))}
-function quickFilter(type,button){
-document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));button.classList.add("active");let result=[...stocks];
-if(type==="up")result=stocks.filter(x=>x.percent>=2);
-if(type==="down")result=stocks.filter(x=>x.percent<=-1);
-if(type==="volume")result=stocks.filter(x=>parseFloat(x.volume)>=10);
-if(type==="breakout")result=stocks.filter(x=>x.percent>=3);
-if(type==="dividend")result=stocks.filter(x=>x.price<50);
-renderTable(result);
-}
-function searchStock(){
-const keyword=document.getElementById("searchInput").value.toUpperCase();
-renderTable(stocks.filter(x=>x.code.includes(keyword)||x.industry.toUpperCase().includes(keyword)));
-}
-function toggleStar(el){el.classList.toggle("active");el.innerText=el.classList.contains("active")?"★":"☆"}
-function openModal(){document.getElementById("loginModal").classList.add("show")}
-function closeModal(){document.getElementById("loginModal").classList.remove("show")}
-function registerUser(){
-const name=document.getElementById("customerName").value,email=document.getElementById("customerEmail").value,phone=document.getElementById("customerPhone").value;
-if(!name||!email||!phone){alert("Vui lòng nhập đầy đủ thông tin.");return}
-alert("Đăng ký thành công!\n\nXin chào "+name);closeModal();
-}
-function showAlert(){alert("🔔 Hệ thống cảnh báo\n\nBạn chưa có cảnh báo giá nào.")}
-renderTable();renderWatchlist();generateChart();
+
 </script>
+
 </body>
 </html>
