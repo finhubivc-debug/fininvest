@@ -3,1864 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<a href="/" class="logo">
-
-    <div class="logo-mark">
-        <span>FI</span>
-    </div>
-
-    <div class="logo-text">
-        <span class="fi">FI</span><span class="invest">NVEST</span>
-    </div>
-
-</a>
-
-<title>FININVEST - Thông tin & Cơ hội đầu tư</title>
-
-<meta name="description"
-content="FININVEST - Tin tức thị trường, phân tích, khuyến nghị và kiến thức đầu tư.">
-
+<title>FININVEST — Thông tin & Cơ hội đầu tư</title>
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --navy:#071a2b;
-    --navy2:#0d2941;
-    --green:#07865f;
-    --green2:#0ca875;
-    --red:#d94343;
-    --yellow:#d99b22;
-    --bg:#f4f6f8;
-    --white:#ffffff;
-    --text:#182532;
-    --muted:#71808d;
-    --border:#e3e8ec;
-}
-
-body{
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.55;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-img{
-    max-width:100%;
-    display:block;
-}
-
-.container{
-    max-width:1280px;
-    margin:auto;
-    padding:0 20px;
-}
-
-/* =====================================================
-   TOP MARKET BAR
-===================================================== */
-
-.market-bar{
-    background:#061521;
-    color:#fff;
-    height:42px;
-    overflow:hidden;
-}
-
-.market-inner{
-    max-width:1500px;
-    margin:auto;
-    height:42px;
-    display:flex;
-    align-items:center;
-}
-
-.market-title{
-    min-width:125px;
-    font-size:11px;
-    font-weight:bold;
-    color:#8fa4b3;
-    padding-left:15px;
-}
-
-.market-scroll{
-    display:flex;
-    height:100%;
-    align-items:center;
-    overflow:hidden;
-    white-space:nowrap;
-}
-
-.market-item{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:0 17px;
-    border-left:1px solid rgba(255,255,255,.08);
-    font-size:11px;
-}
-
-.market-code{
-    font-weight:bold;
-}
-
-.market-price{
-    font-weight:bold;
-}
-
-.market-up{
-    color:#2bd29a;
-}
-
-.market-down{
-    color:#ff6666;
-}
-
-.market-neutral{
-    color:#e1b74b;
-}
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header{
-    height:76px;
-    background:#fff;
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:999;
-}
-
-.header-inner{
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo-mark{
-    width:38px;
-    height:38px;
-    background:var(--navy);
-    color:#fff;
-    border-radius:7px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.logo-name{
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:-.5px;
-}
-
-.logo-name span{
-    color:var(--green);
-}
-
-.nav{
-    display:flex;
-    gap:28px;
-    align-items:center;
-}
-
-.nav a{
-    font-size:14px;
-    font-weight:600;
-    color:#394957;
-}
-
-.nav a:hover{
-    color:var(--green);
-}
-
-.header-search{
-    width:190px;
-    height:38px;
-    border:1px solid var(--border);
-    border-radius:5px;
-    padding:0 12px;
-}
-
-.menu-btn{
-    display:none;
-    font-size:25px;
-    cursor:pointer;
-}
-
-/* =====================================================
-   HERO NEWS
-===================================================== */
-
-.hero{
-    background:#fff;
-    padding:28px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:20px;
-}
-
-.hero-main{
-    height:430px;
-    position:relative;
-    border-radius:5px;
-    overflow:hidden;
-    background:
-    linear-gradient(
-        rgba(4,20,34,.1),
-        rgba(4,20,34,.88)
-    ),
-    linear-gradient(135deg,#305a73,#0a1e30);
-    color:#fff;
-    display:flex;
-    align-items:flex-end;
-    padding:35px;
-}
-
-.hero-main-content{
-    max-width:720px;
-}
-
-.category{
-    color:var(--green2);
-    font-size:11px;
-    font-weight:bold;
-    text-transform:uppercase;
-    margin-bottom:9px;
-}
-
-.hero-main h1{
-    font-size:35px;
-    line-height:1.15;
-    margin-bottom:12px;
-}
-
-.hero-main p{
-    color:#d2dce3;
-    font-size:14px;
-}
-
-.hero-side{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-.side-news{
-    height:205px;
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:5px;
-    overflow:hidden;
-}
-
-.side-image{
-    height:100px;
-    background:
-    linear-gradient(135deg,#dce6eb,#839aa8);
-}
-
-.side-content{
-    padding:12px 15px;
-}
-
-.side-content h3{
-    font-size:15px;
-    line-height:1.35;
-}
-
-/* =====================================================
-   NEWS SECTION
-===================================================== */
-
-.section{
-    padding:50px 0;
-}
-
-.section-title{
-    font-size:25px;
-    margin-bottom:5px;
-}
-
-.section-desc{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:22px;
-}
-
-.more{
-    color:var(--green);
-    font-weight:bold;
-    font-size:12px;
-}
-
-.news-layout{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:25px;
-}
-
-.news-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-.news-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:5px;
-    overflow:hidden;
-}
-
-.news-img{
-    height:170px;
-    background:
-    linear-gradient(135deg,#d9e4e9,#8da2af);
-}
-
-.news-body{
-    padding:16px;
-}
-
-.news-body h3{
-    font-size:16px;
-    line-height:1.35;
-    margin:6px 0;
-}
-
-.news-body p{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.news-time{
-    color:var(--green);
-    font-size:10px;
-    font-weight:bold;
-}
-
-.latest{
-    background:#fff;
-    border:1px solid var(--border);
-    padding:18px;
-}
-
-.latest h3{
-    font-size:17px;
-    padding-bottom:13px;
-    border-bottom:2px solid var(--navy);
-}
-
-.latest-item{
-    padding:15px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.latest-item:last-child{
-    border-bottom:0;
-}
-
-.latest-item span{
-    font-size:10px;
-    color:var(--green);
-}
-
-.latest-item h4{
-    font-size:13px;
-    line-height:1.4;
-    margin-top:3px;
-}
-
-/* =====================================================
-   INVESTMENT RECOMMENDATION
-===================================================== */
-
-.recommend-section{
-    background:#fff;
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-}
-
-.recommend-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.recommend-card{
-    border:1px solid var(--border);
-    background:#fff;
-    padding:20px;
-    border-radius:5px;
-}
-
-.recommend-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.stock-code{
-    font-size:25px;
-    font-weight:800;
-}
-
-.rating{
-    font-size:11px;
-    font-weight:bold;
-    padding:5px 9px;
-    border-radius:4px;
-    background:#e9f8f2;
-    color:var(--green);
-}
-
-.recommend-card h3{
-    margin:15px 0 5px;
-    font-size:17px;
-}
-
-.recommend-card p{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.price-row{
-    display:flex;
-    justify-content:space-between;
-    margin-top:18px;
-    padding-top:15px;
-    border-top:1px solid var(--border);
-}
-
-.price{
-    font-size:19px;
-    font-weight:bold;
-}
-
-.target{
-    color:var(--green);
-    font-weight:bold;
-}
-
-.recommend-label{
-    margin-top:15px;
-    padding:8px 10px;
-    background:#f6f8fa;
-    font-size:11px;
-    color:#52616d;
-}
-
-/* =====================================================
-   MARKET OPPORTUNITY
-===================================================== */
-
-.opportunity{
-    background:var(--navy);
-    color:#fff;
-}
-
-.opportunity .section-desc{
-    color:#9cafbb;
-}
-
-.opportunity-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.opportunity-card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    padding:22px;
-    border-radius:5px;
-}
-
-.opportunity-icon{
-    font-size:25px;
-    margin-bottom:12px;
-}
-
-.opportunity-card h3{
-    font-size:16px;
-}
-
-.opportunity-card p{
-    font-size:12px;
-    color:#9fb0bc;
-    margin-top:6px;
-}
-
-/* =====================================================
-   EDUCATION
-===================================================== */
-
-.education-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:18px;
-}
-
-.education-card{
-    background:#fff;
-    border:1px solid var(--border);
-    padding:25px;
-    border-radius:5px;
-}
-
-.education-number{
-    font-size:35px;
-    font-weight:800;
-    color:#dfe5e9;
-}
-
-.education-card h3{
-    font-size:18px;
-    margin:10px 0;
-}
-
-.education-card p{
-    font-size:12px;
-    color:var(--muted);
-}
-
-.education-link{
-    display:inline-block;
-    margin-top:18px;
-    color:var(--green);
-    font-size:12px;
-    font-weight:bold;
-}
-
-/* =====================================================
-   OPEN ACCOUNT CTA
-===================================================== */
-
-.account{
-    padding:60px 0;
-}
-
-.account-box{
-    background:
-    linear-gradient(135deg,#0b273d,#092033);
-    color:#fff;
-    padding:55px;
-    border-radius:7px;
-    display:grid;
-    grid-template-columns:1.4fr .6fr;
-    align-items:center;
-    gap:30px;
-}
-
-.account-box h2{
-    font-size:32px;
-    line-height:1.2;
-}
-
-.account-box p{
-    color:#a9bbc7;
-    margin-top:10px;
-    font-size:14px;
-}
-
-.account-button{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:50px;
-    background:var(--green);
-    color:#fff;
-    border-radius:5px;
-    font-weight:bold;
-}
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.footer{
-    background:#061520;
-    color:#fff;
-    padding:50px 0 20px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:1.5fr 1fr 1fr 1fr;
-    gap:35px;
-}
-
-.footer h4{
-    font-size:14px;
-    margin-bottom:15px;
-}
-
-.footer a,
-.footer p{
-    color:#8398a6;
-    display:block;
-    font-size:12px;
-    margin-bottom:8px;
-}
-
-.copyright{
-    border-top:1px solid rgba(255,255,255,.08);
-    margin-top:40px;
-    padding-top:20px;
-    color:#637886;
-    font-size:10px;
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:1000px){
-
-    .nav{
-        display:none;
-    }
-
-    .header-search{
-        display:none;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero-grid,
-    .news-layout{
-        grid-template-columns:1fr;
-    }
-
-    .recommend-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .opportunity-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:700px){
-
-    .market-title{
-        display:none;
-    }
-
-    .market-item{
-        padding:0 10px;
-    }
-
-    .hero-main{
-        height:350px;
-        padding:22px;
-    }
-
-    .hero-main h1{
-        font-size:27px;
-    }
-
-    .news-grid{
-        grid-template-columns:1fr;
-    }
-
-    .recommend-grid,
-    .education-grid{
-        grid-template-columns:1fr;
-    }
-
-    .opportunity-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .account-box{
-        grid-template-columns:1fr;
-        padding:35px 25px;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:480px){
-
-    .opportunity-grid{
-        grid-template-columns:1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero-main{
-        height:320px;
-    }
-
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#071a2b;--navy2:#0c263c;--green:#08a66a;--gold:#c6a15b;--red:#e05252;--bg:#f4f6f8;--text:#172532;--muted:#71808d;--line:#e1e7eb;--white:#fff}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}.container{max-width:1280px;margin:auto;padding:0 20px}
+.market{height:42px;background:#06151f;color:#fff;overflow:hidden}.market-in{max-width:1500px;margin:auto;display:flex;height:42px;align-items:center}.market-title{padding:0 16px;color:#91a5b2;font-size:11px;font-weight:700}.ticker{display:flex;overflow:auto;white-space:nowrap;height:100%;align-items:center}.tick{padding:0 18px;border-left:1px solid #ffffff12;font-size:11px}.tick b{margin-right:8px}.up{color:#29d19a}.down{color:#ff6868}
+header{height:76px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}.head{height:100%;display:flex;align-items:center;gap:28px}.logo{display:flex;align-items:center;gap:9px;margin-right:auto}.logo-mark{width:40px;height:40px;border:2px solid var(--gold);border-radius:6px;background:var(--navy);display:grid;place-items:center;color:var(--gold);font-size:15px;font-weight:900}.logo-text{font-size:22px;font-weight:900;letter-spacing:-1px}.fi{color:var(--gold)}.invest{color:var(--green)}nav{display:flex;gap:24px;font-size:13px;font-weight:700;color:#344653}nav a:hover{color:var(--green)}.search{width:170px;height:37px;border:1px solid var(--line);border-radius:5px;padding:0 12px}.member{display:flex;gap:7px;align-items:center}.login{font-size:12px;font-weight:700;padding:9px 11px}.register,.cta{background:var(--green);color:#fff;padding:10px 14px;border-radius:5px;font-size:12px;font-weight:800;border:0;cursor:pointer}.hamb{display:none;font-size:24px;cursor:pointer}
+
+.hero{background:#fff;padding:28px 0;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}.hero-main{height:420px;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#284d64,#071a2b);color:#fff;display:flex;align-items:end;padding:34px}.tag{font-size:10px;color:#28c992;font-weight:800;letter-spacing:.6px;margin-bottom:9px}.hero h1{font-size:35px;line-height:1.15;max-width:720px;margin-bottom:12px}.hero p{font-size:14px;color:#ccd9e0;max-width:690px}.side{display:grid;gap:20px}.side-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}.side-img,.news-img{height:105px;background:linear-gradient(135deg,#dce7eb,#849ba8)}.side-body{padding:13px}.side-body h3{font-size:14px;line-height:1.35}
+.section{padding:48px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}.section-title{font-size:25px}.desc{font-size:12px;color:var(--muted)}.more{font-size:12px;color:var(--green);font-weight:800}
+.news-layout{display:grid;grid-template-columns:2fr 1fr;gap:22px}.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.news-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}.news-body{padding:15px}.news-body h3{font-size:15px;line-height:1.35;margin:5px 0 7px}.news-body p{font-size:12px;color:var(--muted)}.latest{background:#fff;border:1px solid var(--line);padding:17px;border-radius:6px}.latest h3{font-size:16px;border-bottom:2px solid var(--navy);padding-bottom:12px}.latest-item{padding:13px 0;border-bottom:1px solid var(--line)}.latest-item:last-child{border:0}.latest-item span{font-size:10px;color:var(--green)}.latest-item h4{font-size:12px;margin-top:3px}
+.recommend{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.rec{border:1px solid var(--line);border-radius:6px;padding:19px}.rec-top{display:flex;justify-content:space-between}.symbol{font-size:25px;font-weight:900}.rating{font-size:10px;color:var(--green);background:#e8f8f2;padding:5px 8px;border-radius:4px;font-weight:800}.rec h3{font-size:16px;margin:13px 0 4px}.rec p{font-size:12px;color:var(--muted)}.prices{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:16px;padding-top:13px;font-size:11px}.prices strong{font-size:18px}.target{color:var(--green)}
+.opportunity{background:var(--navy);color:#fff}.op-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.op{background:#ffffff08;border:1px solid #ffffff12;border-radius:6px;padding:21px}.op-icon{font-size:25px;margin-bottom:10px}.op h3{font-size:15px}.op p{font-size:11px;color:#a9bbc5;margin-top:5px}
+.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.edu{background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px}.num{font-size:35px;font-weight:900;color:#dfe5e9}.edu h3{font-size:17px;margin:7px 0}.edu p{font-size:12px;color:var(--muted)}.edu a{display:inline-block;margin-top:15px;color:var(--green);font-size:12px;font-weight:800}
+.account{padding:20px 0 58px}.account-box{background:linear-gradient(135deg,#0c2a40,#071a2b);color:#fff;border-radius:7px;padding:48px;display:grid;grid-template-columns:1.5fr .5fr;align-items:center;gap:30px}.account-box h2{font-size:31px;line-height:1.15}.account-box p{font-size:13px;color:#a9bbc5;margin-top:10px}.account-btn{background:var(--green);color:#fff;padding:14px;text-align:center;border-radius:5px;font-size:12px;font-weight:900}
+footer{background:#061520;color:#fff;padding:45px 0 20px}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}.foot h4{font-size:13px;margin-bottom:12px}.foot a,.foot p{font-size:11px;color:#8398a6;display:block;margin-bottom:7px}.copy{border-top:1px solid #ffffff10;margin-top:35px;padding-top:17px;color:#607784;font-size:10px}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.box{background:#fff;width:100%;max-width:430px;border-radius:8px;padding:27px;position:relative}.close{position:absolute;right:17px;top:12px;font-size:22px;cursor:pointer;color:#778}.box h2{font-size:22px}.box p{font-size:12px;color:var(--muted);margin:4px 0 18px}.form label{font-size:11px;font-weight:700;display:block;margin:10px 0 5px}.form input,.form select{width:100%;height:40px;border:1px solid var(--line);border-radius:4px;padding:0 10px}.form button{width:100%;height:42px;margin-top:16px;background:var(--green);border:0;color:#fff;border-radius:5px;font-weight:800;cursor:pointer}.switch{font-size:11px;text-align:center;margin-top:14px}.switch a{color:var(--green);font-weight:800}.admin{display:none}.admin.show{display:block}.admin-bar{background:var(--navy);color:#fff;padding:16px}.admin-grid{display:grid;grid-template-columns:220px 1fr;min-height:560px}.admin-side{background:#fff;border-right:1px solid var(--line);padding:18px}.admin-side a{display:block;padding:10px;font-size:12px;border-radius:4px}.admin-side a:hover{background:#eef7f3;color:var(--green)}.admin-main{padding:25px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.stat{background:#fff;border:1px solid var(--line);padding:18px;border-radius:6px}.stat small{color:var(--muted);font-size:10px}.stat b{display:block;font-size:25px;margin-top:5px}.table{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:auto}.table table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.table th{background:#f7f9fa}
+@media(max-width:1050px){nav,.search{display:none}.hamb{display:block}.hero-grid,.news-layout{grid-template-columns:1fr}.rec-grid{grid-template-columns:1fr 1fr}.op-grid{grid-template-columns:1fr 1fr}.edu-grid{grid-template-columns:1fr 1fr}.account-box{grid-template-columns:1fr}.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.hero-main{height:340px;padding:22px}.hero h1{font-size:27px}.news-grid,.rec-grid,.edu-grid{grid-template-columns:1fr}.op-grid{grid-template-columns:1fr}.foot{grid-template-columns:1fr}.account-box{padding:30px 23px}.member{display:none}.logo-text{font-size:19px}}
 </style>
 </head>
-
-
 <body>
 
-
-<!-- =====================================================
-     MARKET DATA BAR
-     KẾT NỐI API VNDIRECT Ở ĐÂY
-===================================================== -->
-
-<div class="market-bar">
-
-<div class="market-inner">
-
-<div class="market-title">
-THỊ TRƯỜNG
+<div class="market">
+  <div class="market-in">
+    <div class="market-title">THỊ TRƯỜNG</div>
+    <div class="ticker" id="ticker"></div>
+  </div>
 </div>
 
-<div class="market-scroll" id="marketData">
-
-<div class="market-item">
-<span class="market-code">VN-INDEX</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">VN30</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">HNX</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">UPCOM</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">FPT</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">VCB</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">HPG</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-<div class="market-item">
-<span class="market-code">SSI</span>
-<span class="market-price">--</span>
-<span class="market-up">--</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header">
-
-<div class="container header-inner">
-
-<a href="#" class="logo">
-
-<div class="logo-mark">
-F
-</div>
-
-<div class="logo-name">
-FIN<span>INVEST</span>
-</div>
-
-</a>
-
-
-<nav class="nav">
-
-<a href="#news">
-Tin tức
-</a>
-
-<a href="#recommend">
-Khuyến nghị
-</a>
-
-<a href="#opportunity">
-Cơ hội đầu tư
-</a>
-
-<a href="#education">
-Hướng dẫn đầu tư
-</a>
-
-<a href="#courses">
-Khóa học
-</a>
-
-</nav>
-
-
-<input
-class="header-search"
-placeholder="Tìm kiếm..."
->
-
-
-<div class="menu-btn"
-onclick="mobileMenu()">
-☰
-</div>
-
-</div>
-
+<header>
+  <div class="container head">
+    <a class="logo" href="#" onclick="showHome()">
+      <div class="logo-mark">FI</div>
+      <div class="logo-text"><span class="fi">FI</span><span class="invest">INVEST</span></div>
+    </a>
+    <nav>
+      <a href="#news">Tin tức</a><a href="#recommend">Khuyến nghị</a>
+      <a href="#opportunity">Cơ hội đầu tư</a><a href="#education">Hướng dẫn</a>
+      <a href="#courses">Khóa học</a>
+    </nav>
+    <input class="search" placeholder="Tìm kiếm...">
+    <div class="member">
+      <a class="login" href="#" onclick="openModal('login')">Đăng nhập</a>
+      <a class="register" href="#" onclick="openModal('register')">Đăng ký</a>
+    </div>
+    <div class="hamb">☰</div>
+  </div>
 </header>
 
-
-<!-- =====================================================
-     TRANG CHỦ - TIN NỔI BẬT
-===================================================== -->
-
+<main id="home">
 <section class="hero">
-
-<div class="container">
-
-<div class="hero-grid">
-
-
-<!-- TIN CHÍNH -->
-
-<article class="hero-main">
-
-<div class="hero-main-content">
-
-<div class="category">
-THỊ TRƯỜNG
+<div class="container hero-grid">
+  <article class="hero-main">
+    <div>
+      <div class="tag">THỊ TRƯỜNG · FININVEST</div>
+      <h1>Thị trường chứng khoán: Dòng tiền đang tìm kiếm cơ hội ở đâu?</h1>
+      <p>Cập nhật diễn biến thị trường, dòng tiền, nhóm ngành nổi bật và những yếu tố có thể ảnh hưởng đến xu hướng đầu tư.</p>
+    </div>
+  </article>
+  <div class="side">
+    <article class="side-card"><div class="side-img"></div><div class="side-body"><div class="tag">DOANH NGHIỆP</div><h3>Những doanh nghiệp đáng chú ý trong mùa công bố kết quả kinh doanh</h3></div></article>
+    <article class="side-card"><div class="side-img"></div><div class="side-body"><div class="tag">VĨ MÔ</div><h3>Lãi suất, tỷ giá và những tác động đến thị trường chứng khoán</h3></div></article>
+  </div>
 </div>
-
-<h1>
-Thị trường chứng khoán:
-Dòng tiền đang tìm kiếm cơ hội ở đâu?
-</h1>
-
-<p>
-Cập nhật diễn biến thị trường, dòng tiền,
-nhóm ngành nổi bật và những yếu tố có thể
-ảnh hưởng đến xu hướng đầu tư.
-</p>
-
-</div>
-
-</article>
-
-
-<!-- TIN BÊN PHẢI -->
-
-<div class="hero-side">
-
-
-<article class="side-news">
-
-<div class="side-image"></div>
-
-<div class="side-content">
-
-<div class="category">
-DOANH NGHIỆP
-</div>
-
-<h3>
-Những doanh nghiệp đáng chú ý trong mùa công bố kết quả kinh doanh
-</h3>
-
-</div>
-
-</article>
-
-
-<article class="side-news">
-
-<div class="side-image"></div>
-
-<div class="side-content">
-
-<div class="category">
-VĨ MÔ
-</div>
-
-<h3>
-Lãi suất, tỷ giá và những tác động đến thị trường chứng khoán
-</h3>
-
-</div>
-
-</article>
-
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- =====================================================
-     TIN TỨC
-===================================================== -->
-
-<section class="section"
-id="news">
-
+<section class="section" id="news">
 <div class="container">
-
-<div class="section-head">
-
-<div>
-
-<h2 class="section-title">
-Tin tức thị trường
-</h2>
-
-<p class="section-desc">
-Thông tin tài chính được cập nhật và chọn lọc.
-</p>
-
-</div>
-
-<a class="more" href="#">
-Xem tất cả →
-</a>
-
-</div>
-
-
+<div class="section-head"><div><h2 class="section-title">Tin tức thị trường</h2><p class="desc">Thông tin tài chính được cập nhật và chọn lọc.</p></div><a class="more" href="#">Xem tất cả →</a></div>
 <div class="news-layout">
-
-
 <div class="news-grid">
-
-
-<article class="news-card">
-
-<div class="news-img"></div>
-
-<div class="news-body">
-
-<div class="news-time">
-THỊ TRƯỜNG · 10 PHÚT TRƯỚC
+  <article class="news-card"><div class="news-img"></div><div class="news-body"><div class="tag">THỊ TRƯỜNG · 10 PHÚT</div><h3>VN-INDEX biến động mạnh, nhóm vốn hóa lớn phân hóa</h3><p>Thanh khoản và diễn biến dòng tiền đang là những yếu tố được nhà đầu tư quan tâm.</p></div></article>
+  <article class="news-card"><div class="news-img"></div><div class="news-body"><div class="tag">DOANH NGHIỆP</div><h3>Kết quả kinh doanh quý mới của các doanh nghiệp lớn</h3><p>Những con số đáng chú ý và tác động đến triển vọng cổ phiếu.</p></div></article>
+  <article class="news-card"><div class="news-img"></div><div class="news-body"><div class="tag">VĨ MÔ</div><h3>Tỷ giá và chính sách tiền tệ ảnh hưởng thế nào đến chứng khoán?</h3><p>Góc nhìn tổng quan về các biến số kinh tế quan trọng.</p></div></article>
+  <article class="news-card"><div class="news-img"></div><div class="news-body"><div class="tag">NGÀNH</div><h3>Nhóm ngành nào đang thu hút dòng tiền?</h3><p>So sánh diễn biến giữa ngân hàng, chứng khoán, bất động sản và thép.</p></div></article>
 </div>
-
-<h3>
-VN-INDEX biến động mạnh, nhóm vốn hóa lớn phân hóa
-</h3>
-
-<p>
-Thanh khoản và diễn biến dòng tiền đang là những yếu tố được nhà đầu tư quan tâm.
-</p>
-
-</div>
-
-</article>
-
-
-<article class="news-card">
-
-<div class="news-img"></div>
-
-<div class="news-body">
-
-<div class="news-time">
-DOANH NGHIỆP · 25 PHÚT TRƯỚC
-</div>
-
-<h3>
-Kết quả kinh doanh quý mới của các doanh nghiệp lớn
-</h3>
-
-<p>
-Những con số đáng chú ý và tác động đến triển vọng cổ phiếu.
-</p>
-
-</div>
-
-</article>
-
-
-<article class="news-card">
-
-<div class="news-img"></div>
-
-<div class="news-body">
-
-<div class="news-time">
-VĨ MÔ · 1 GIỜ TRƯỚC
-</div>
-
-<h3>
-Tỷ giá và chính sách tiền tệ ảnh hưởng thế nào đến chứng khoán?
-</h3>
-
-<p>
-Góc nhìn tổng quan về các biến số kinh tế quan trọng.
-</p>
-
-</div>
-
-</article>
-
-
-<article class="news-card">
-
-<div class="news-img"></div>
-
-<div class="news-body">
-
-<div class="news-time">
-NGÀNH · 2 GIỜ TRƯỚC
-</div>
-
-<h3>
-Nhóm ngành nào đang thu hút dòng tiền?
-</h3>
-
-<p>
-So sánh diễn biến giữa ngân hàng, chứng khoán, bất động sản và thép.
-</p>
-
-</div>
-
-</article>
-
-
-</div>
-
-
-<!-- LATEST -->
-
-<aside class="latest">
-
-<h3>
-MỚI NHẤT
-</h3>
-
-
-<div class="latest-item">
-
-<span>14:32</span>
-
-<h4>
-Khối ngoại thay đổi trạng thái giao dịch
-</h4>
-
-</div>
-
-
-<div class="latest-item">
-
-<span>14:05</span>
-
-<h4>
-Thanh khoản thị trường cải thiện
-</h4>
-
-</div>
-
-
-<div class="latest-item">
-
-<span>13:48</span>
-
-<h4>
-Nhóm ngân hàng tiếp tục dẫn dắt
-</h4>
-
-</div>
-
-
-<div class="latest-item">
-
-<span>13:20</span>
-
-<h4>
-Cổ phiếu vốn hóa lớn phân hóa
-</h4>
-
-</div>
-
-
-<div class="latest-item">
-
-<span>12:55</span>
-
-<h4>
-Nhà đầu tư cá nhân đang quan tâm nhóm nào?
-</h4>
-
-</div>
-
+<aside class="latest"><h3>MỚI NHẤT</h3>
+  <div class="latest-item"><span>14:32</span><h4>Khối ngoại thay đổi trạng thái giao dịch</h4></div>
+  <div class="latest-item"><span>14:05</span><h4>Thanh khoản thị trường cải thiện</h4></div>
+  <div class="latest-item"><span>13:48</span><h4>Nhóm ngân hàng tiếp tục dẫn dắt</h4></div>
+  <div class="latest-item"><span>13:20</span><h4>Cổ phiếu vốn hóa lớn phân hóa</h4></div>
 </aside>
-
-
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     KHUYẾN NGHỊ ĐẦU TƯ
-===================================================== -->
-
-<section class="section recommend-section"
-id="recommend">
-
+<section class="section recommend" id="recommend">
 <div class="container">
-
-<div class="section-head">
-
-<div>
-
-<h2 class="section-title">
-Khuyến nghị đầu tư
-</h2>
-
-<p class="section-desc">
-Các góc nhìn và phân tích được xây dựng dựa trên dữ liệu thị trường.
-</p>
-
+<div class="section-head"><div><h2 class="section-title">Khuyến nghị đầu tư</h2><p class="desc">Các góc nhìn và phân tích được xây dựng dựa trên dữ liệu thị trường.</p></div><a class="more" href="#">Xem toàn bộ →</a></div>
+<div class="rec-grid">
+  <article class="rec"><div class="rec-top"><div class="symbol">FPT</div><div class="rating">QUAN TÂM</div></div><h3>Triển vọng tăng trưởng dài hạn</h3><p>Công nghệ và chuyển đổi số tiếp tục là động lực tăng trưởng.</p><div class="prices"><span>Giá tham chiếu<br><strong>128.5</strong></span><span>Mục tiêu<br><strong class="target">145.0</strong></span></div></article>
+  <article class="rec"><div class="rec-top"><div class="symbol">VCB</div><div class="rating">THEO DÕI</div></div><h3>Nền tảng cơ bản ổn định</h3><p>Chất lượng tài sản và vị thế trong hệ thống ngân hàng.</p><div class="prices"><span>Giá tham chiếu<br><strong>91.2</strong></span><span>Mục tiêu<br><strong class="target">102.0</strong></span></div></article>
+  <article class="rec"><div class="rec-top"><div class="symbol">HPG</div><div class="rating">QUAN TÂM</div></div><h3>Theo dõi chu kỳ ngành thép</h3><p>Sản lượng, giá thép và nhu cầu xây dựng là những biến số quan trọng.</p><div class="prices"><span>Giá tham chiếu<br><strong>27.65</strong></span><span>Mục tiêu<br><strong class="target">32.0</strong></span></div></article>
 </div>
-
-<a class="more" href="#">
-Xem toàn bộ →
-</a>
-
 </div>
-
-
-<div class="recommend-grid">
-
-
-<!-- FPT -->
-
-<div class="recommend-card">
-
-<div class="recommend-top">
-
-<div class="stock-code">
-FPT
-</div>
-
-<div class="rating">
-QUAN TÂM
-</div>
-
-</div>
-
-<h3>
-Triển vọng tăng trưởng dài hạn
-</h3>
-
-<p>
-Công nghệ và chuyển đổi số tiếp tục là động lực tăng trưởng.
-</p>
-
-<div class="price-row">
-
-<div>
-Giá tham chiếu
-<br>
-<strong class="price">128.5</strong>
-</div>
-
-<div>
-Mục tiêu
-<br>
-<strong class="target">145.0</strong>
-</div>
-
-</div>
-
-<div class="recommend-label">
-Phân tích cơ bản · Trung dài hạn
-</div>
-
-</div>
-
-
-<!-- VCB -->
-
-<div class="recommend-card">
-
-<div class="recommend-top">
-
-<div class="stock-code">
-VCB
-</div>
-
-<div class="rating">
-THEO DÕI
-</div>
-
-</div>
-
-<h3>
-Nền tảng cơ bản ổn định
-</h3>
-
-<p>
-Chất lượng tài sản và vị thế trong hệ thống ngân hàng.
-</p>
-
-<div class="price-row">
-
-<div>
-Giá tham chiếu
-<br>
-<strong class="price">91.2</strong>
-</div>
-
-<div>
-Mục tiêu
-<br>
-<strong class="target">102.0</strong>
-</div>
-
-</div>
-
-<div class="recommend-label">
-Phân tích cơ bản · Trung hạn
-</div>
-
-</div>
-
-
-<!-- HPG -->
-
-<div class="recommend-card">
-
-<div class="recommend-top">
-
-<div class="stock-code">
-HPG
-</div>
-
-<div class="rating">
-QUAN TÂM
-</div>
-
-</div>
-
-<h3>
-Theo dõi chu kỳ ngành thép
-</h3>
-
-<p>
-Sản lượng, giá thép và nhu cầu xây dựng là những biến số quan trọng.
-</p>
-
-<div class="price-row">
-
-<div>
-Giá tham chiếu
-<br>
-<strong class="price">27.65</strong>
-</div>
-
-<div>
-Mục tiêu
-<br>
-<strong class="target">32.0</strong>
-</div>
-
-</div>
-
-<div class="recommend-label">
-Phân tích ngành · Trung hạn
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- =====================================================
-     TÌM KIẾM CƠ HỘI
-===================================================== -->
-
-<section class="section opportunity"
-id="opportunity">
-
+<section class="section opportunity" id="opportunity">
 <div class="container">
-
-<div class="section-head">
-
-<div>
-
-<h2 class="section-title">
-Tìm kiếm cơ hội đầu tư
-</h2>
-
-<p class="section-desc">
-Khám phá thị trường theo nhiều góc nhìn khác nhau.
-</p>
-
+<div class="section-head"><div><h2 class="section-title">Tìm kiếm cơ hội đầu tư</h2><p class="desc">Khám phá thị trường theo nhiều góc nhìn khác nhau.</p></div></div>
+<div class="op-grid">
+  <div class="op"><div class="op-icon">📈</div><h3>Cổ phiếu tăng trưởng</h3><p>Tìm doanh nghiệp có tốc độ tăng trưởng doanh thu và lợi nhuận tốt.</p></div>
+  <div class="op"><div class="op-icon">💰</div><h3>Cổ phiếu giá trị</h3><p>Tìm doanh nghiệp có nền tảng tốt và mức định giá hợp lý.</p></div>
+  <div class="op"><div class="op-icon">💎</div><h3>Cổ tức</h3><p>Khám phá các doanh nghiệp có lịch sử chi trả cổ tức ổn định.</p></div>
+  <div class="op"><div class="op-icon">🔥</div><h3>Dòng tiền</h3><p>Theo dõi những nhóm ngành và cổ phiếu đang thu hút thanh khoản.</p></div>
 </div>
-
 </div>
-
-
-<div class="opportunity-grid">
-
-
-<div class="opportunity-card">
-
-<div class="opportunity-icon">
-📈
-</div>
-
-<h3>
-Cổ phiếu tăng trưởng
-</h3>
-
-<p>
-Tìm doanh nghiệp có tốc độ tăng trưởng doanh thu và lợi nhuận tốt.
-</p>
-
-</div>
-
-
-<div class="opportunity-card">
-
-<div class="opportunity-icon">
-💰
-</div>
-
-<h3>
-Cổ phiếu giá trị
-</h3>
-
-<p>
-Tìm kiếm doanh nghiệp có nền tảng tốt và mức định giá hợp lý.
-</p>
-
-</div>
-
-
-<div class="opportunity-card">
-
-<div class="opportunity-icon">
-💎
-</div>
-
-<h3>
-Cổ tức
-</h3>
-
-<p>
-Khám phá các doanh nghiệp có lịch sử chi trả cổ tức ổn định.
-</p>
-
-</div>
-
-
-<div class="opportunity-card">
-
-<div class="opportunity-icon">
-🔥
-</div>
-
-<h3>
-Dòng tiền
-</h3>
-
-<p>
-Theo dõi những nhóm ngành và cổ phiếu đang thu hút thanh khoản.
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- =====================================================
-     HƯỚNG DẪN + KHÓA HỌC
-===================================================== -->
-
-<section class="section"
-id="education">
-
+<section class="section" id="education">
 <div class="container">
-
-<div class="section-head">
-
-<div>
-
-<h2 class="section-title">
-Học đầu tư cùng FININVEST
-</h2>
-
-<p class="section-desc">
-Từ những kiến thức đầu tiên đến phân tích chuyên sâu.
-</p>
-
+<div class="section-head"><div><h2 class="section-title">Học đầu tư cùng FININVEST</h2><p class="desc">Từ những kiến thức đầu tiên đến phân tích chuyên sâu.</p></div></div>
+<div class="edu-grid">
+  <article class="edu"><div class="num">01</div><h3>Hướng dẫn đầu tư</h3><p>Chứng khoán là gì? Cách đọc bảng giá, mở tài khoản, đặt lệnh và quản lý danh mục.</p><a href="#">Bắt đầu học →</a></article>
+  <article class="edu" id="courses"><div class="num">02</div><h3>Khóa học đầu tư</h3><p>Các chương trình từ cơ bản đến nâng cao: phân tích doanh nghiệp, định giá và kỹ thuật.</p><a href="#">Xem khóa học →</a></article>
+  <article class="edu"><div class="num">03</div><h3>Xây dựng chiến lược</h3><p>Quản trị vốn, phân bổ tài sản, quản trị rủi ro và xây dựng danh mục.</p><a href="#">Tìm hiểu thêm →</a></article>
 </div>
-
-<a class="more" href="#">
-Xem Academy →
-</a>
-
 </div>
-
-
-<div class="education-grid">
-
-
-<article class="education-card">
-
-<div class="education-number">
-01
-</div>
-
-<h3>
-Hướng dẫn đầu tư
-</h3>
-
-<p>
-Chứng khoán là gì? Cách đọc bảng giá,
-cách mở tài khoản, đặt lệnh và quản lý danh mục.
-</p>
-
-<a href="#" class="education-link">
-Bắt đầu học →
-</a>
-
-</article>
-
-
-<article class="education-card"
-id="courses">
-
-<div class="education-number">
-02
-</div>
-
-<h3>
-Khóa học đầu tư
-</h3>
-
-<p>
-Các chương trình học từ cơ bản đến nâng cao:
-phân tích doanh nghiệp, định giá và phân tích kỹ thuật.
-</p>
-
-<a href="#" class="education-link">
-Xem khóa học →
-</a>
-
-</article>
-
-
-<article class="education-card">
-
-<div class="education-number">
-03
-</div>
-
-<h3>
-Xây dựng chiến lược
-</h3>
-
-<p>
-Quản trị vốn, phân bổ tài sản,
-quản trị rủi ro và xây dựng danh mục.
-</p>
-
-<a href="#" class="education-link">
-Tìm hiểu thêm →
-</a>
-
-</article>
-
-
-</div>
-
-</div>
-
 </section>
 
+<section class="account"><div class="container"><div class="account-box"><div><h2>Sẵn sàng bắt đầu hành trình đầu tư?</h2><p>Tìm hiểu thị trường, lựa chọn công ty chứng khoán phù hợp và mở tài khoản đầu tư trực tuyến.</p></div><a class="account-btn" href="#" onclick="openModal('register')">ĐĂNG KÝ THÀNH VIÊN</a></div></div></section>
+</main>
 
-<!-- =====================================================
-     MỞ TÀI KHOẢN
-===================================================== -->
-
-<section class="account">
-
-<div class="container">
-
-<div class="account-box">
-
-<div>
-
-<h2>
-Sẵn sàng bắt đầu hành trình đầu tư?
-</h2>
-
-<p>
-Tìm hiểu thị trường, lựa chọn công ty chứng khoán
-phù hợp và mở tài khoản đầu tư trực tuyến.
-</p>
-
-</div>
-
-<a href="#"
-class="account-button">
-MỞ TÀI KHOẢN ĐẦU TƯ
-</a>
-
-</div>
-
-</div>
-
+<section class="admin" id="admin">
+  <div class="admin-bar"><div class="container"><b>FININVEST ADMIN</b> — Khu vực quản trị</div></div>
+  <div class="admin-grid">
+    <aside class="admin-side"><a href="#">📊 Tổng quan</a><a href="#">📰 Tin tức</a><a href="#">📈 Khuyến nghị</a><a href="#">🎓 Khóa học</a><a href="#">👥 Thành viên</a><a href="#" onclick="showHome()">← Về website</a></aside>
+    <div class="admin-main">
+      <h2>Dashboard</h2><p class="desc">Bản demo quản trị chạy trên trình duyệt.</p>
+      <div class="stats" style="margin-top:18px">
+        <div class="stat"><small>THÀNH VIÊN</small><b id="memberCount">0</b></div>
+        <div class="stat"><small>TIN TỨC</small><b>1,286</b></div>
+        <div class="stat"><small>KHUYẾN NGHỊ</small><b>245</b></div>
+        <div class="stat"><small>KHÓA HỌC</small><b>32</b></div>
+      </div>
+      <div class="table"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th></tr></thead><tbody id="membersTable"></tbody></table></div>
+    </div>
+  </div>
 </section>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
+<footer>
 <div class="container">
-
-<div class="footer-grid">
-
-
-<div>
-
-<div class="logo">
-
-<div class="logo-mark">
-F
+<div class="foot">
+<div><div class="logo"><div class="logo-mark">FI</div><div class="logo-text"><span class="fi">FI</span><span class="invest">INVEST</span></div></div><p style="margin-top:13px">Thông tin, dữ liệu và kiến thức đầu tư dành cho nhà đầu tư Việt Nam.</p></div>
+<div><h4>Thị trường</h4><a href="#">VN-INDEX</a><a href="#">VN30</a><a href="#">HNX</a><a href="#">UPCOM</a></div>
+<div><h4>Đầu tư</h4><a href="#">Khuyến nghị</a><a href="#">Cổ phiếu</a><a href="#">Cơ hội đầu tư</a><a href="#">Phân tích</a></div>
+<div><h4>Kiến thức</h4><a href="#">Hướng dẫn đầu tư</a><a href="#">Khóa học</a><a href="#">Academy</a><a href="#">Mở tài khoản</a></div>
 </div>
-
-<div class="logo-name"
-style="color:white">
-FIN<span>INVEST</span>
+<div class="copy">© 2026 FININVEST. All rights reserved. · Bản demo giao diện. Thông tin không phải cam kết lợi nhuận đầu tư.</div>
 </div>
-
-</div>
-
-<p style="margin-top:15px">
-Thông tin, dữ liệu và kiến thức
-đầu tư dành cho nhà đầu tư Việt Nam.
-</p>
-
-</div>
-
-
-<div>
-
-<h4>Thị trường</h4>
-
-<a href="#">VN-INDEX</a>
-<a href="#">VN30</a>
-<a href="#">HNX</a>
-<a href="#">UPCOM</a>
-<a href="#">Dòng tiền</a>
-
-</div>
-
-
-<div>
-
-<h4>Đầu tư</h4>
-
-<a href="#">Khuyến nghị</a>
-<a href="#">Cổ phiếu</a>
-<a href="#">Cơ hội đầu tư</a>
-<a href="#">Phân tích</a>
-
-</div>
-
-
-<div>
-
-<h4>Kiến thức</h4>
-
-<a href="#">Hướng dẫn đầu tư</a>
-<a href="#">Khóa học</a>
-<a href="#">Academy</a>
-<a href="#">Mở tài khoản</a>
-
-</div>
-
-
-</div>
-
-
-<div class="copyright">
-
-© 2026 FININVEST. All rights reserved.
-
-<br><br>
-
-Thông tin trên FININVEST nhằm mục đích cung cấp
-thông tin và kiến thức. Nội dung không cấu thành
-lời mời hoặc cam kết lợi nhuận đầu tư.
-
-</div>
-
-</div>
-
 </footer>
 
+<div class="modal" id="modal">
+<div class="box">
+<div class="close" onclick="closeModal()">×</div>
+<h2 id="modalTitle">Đăng ký</h2><p id="modalDesc">Tạo tài khoản thành viên FinInvest.</p>
+<form class="form" id="userForm">
+<div id="registerFields">
+<label>Họ và tên</label><input id="fullname" placeholder="Nguyễn Văn A">
+<label>Email</label><input id="email" type="email" placeholder="email@example.com">
+<label>Số điện thoại</label><input id="phone" placeholder="09xxxxxxxx">
+</div>
+<label>Email đăng nhập</label><input id="loginEmail" type="email" placeholder="email@example.com">
+<label>Mật khẩu</label><input id="password" type="password" placeholder="••••••••">
+<button type="submit" id="submitBtn">ĐĂNG KÝ</button>
+</form>
+<div class="switch" id="switchText">Đã có tài khoản? <a href="#" onclick="openModal('login')">Đăng nhập</a></div>
+</div>
+</div>
 
 <script>
+const demoMarket=[
+['VN-INDEX','1,284.56','+0.66%','up'],['VN30','1,362.84','+0.82%','up'],['HNX','238.15','+0.31%','up'],
+['UPCOM','98.42','-0.12%','down'],['FPT','128.50','+1.24%','up'],['VCB','91.20','+0.55%','up'],['HPG','27.65','+2.11%','up'],['SSI','31.80','-0.42%','down']
+];
+document.getElementById('ticker').innerHTML=demoMarket.map(x=>`<div class="tick"><b>${x[0]}</b><span>${x[1]}</span> <span class="${x[3]}">${x[2]}</span></div>`).join('');
 
-/* =====================================================
-   VNDIRECT DATA CONNECTION
-===================================================== */
-
-/*
-   KHÔNG ĐẶT API KEY TRỰC TIẾP TRONG INDEX.HTML.
-
-   Kiến trúc khuyến nghị:
-
-   VNDIRECT API
-        ↓
-   SERVER / API PROXY
-        ↓
-   /api/market
-        ↓
-   FININVEST INDEX.HTML
-
-   Khi backend sẵn sàng,
-   thay URL dưới đây bằng endpoint của anh.
-*/
-
-
-async function loadMarketData(){
-
-    try{
-
-        const response =
-        await fetch("/api/market");
-
-        if(!response.ok){
-            throw new Error(
-                "Market API unavailable"
-            );
-        }
-
-        const data =
-        await response.json();
-
-        updateMarketUI(data);
-
-    }catch(error){
-
-        console.log(
-            "Chưa kết nối Market API:",
-            error.message
-        );
-
-    }
-
+let mode='register';
+function openModal(type){
+  mode=type;
+  document.getElementById('modal').classList.add('show');
+  const reg=document.getElementById('registerFields');
+  const title=document.getElementById('modalTitle');
+  const desc=document.getElementById('modalDesc');
+  const btn=document.getElementById('submitBtn');
+  const sw=document.getElementById('switchText');
+  if(type==='register'){
+    title.textContent='Tạo tài khoản FinInvest';desc.textContent='Tham gia cộng đồng nhà đầu tư FinInvest.';
+    reg.style.display='block';btn.textContent='ĐĂNG KÝ';sw.innerHTML='Đã có tài khoản? <a href="#" onclick="openModal(\'login\')">Đăng nhập</a>';
+    document.getElementById('loginEmail').previousElementSibling.textContent='Email đăng nhập';
+  }else{
+    title.textContent='Đăng nhập FinInvest';desc.textContent='Truy cập khu vực thành viên.';
+    reg.style.display='none';btn.textContent='ĐĂNG NHẬP';sw.innerHTML='Chưa có tài khoản? <a href="#" onclick="openModal(\'register\')">Đăng ký</a>';
+  }
 }
-
-
-function updateMarketUI(data){
-
-    /*
-       Ví dụ data:
-
-       {
-          "VNINDEX":{
-             "price":1284.56,
-             "change":0.66
-          },
-          "VN30":{
-             "price":1362.84,
-             "change":0.82
-          }
-       }
-    */
-
-    const items =
-    document.querySelectorAll(
-        ".market-item"
-    );
-
-    items.forEach(item => {
-
-        const code =
-        item.querySelector(
-            ".market-code"
-        ).innerText;
-
-        if(!data[code]) return;
-
-        item.querySelector(
-            ".market-price"
-        ).innerText =
-        data[code].price;
-
-        const change =
-        data[code].change;
-
-        const changeElement =
-        item.querySelector(
-            ".market-up"
-        );
-
-        changeElement.innerText =
-        (change >= 0 ? "+" : "") +
-        change +
-        "%";
-
-        changeElement.className =
-        change >= 0
-        ? "market-up"
-        : "market-down";
-
-    });
-
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+document.getElementById('userForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const email=document.getElementById('loginEmail').value.trim();
+ const password=document.getElementById('password').value;
+ let members=JSON.parse(localStorage.getItem('fininvest_members')||'[]');
+ if(mode==='register'){
+   const fullname=document.getElementById('fullname').value.trim();
+   const phone=document.getElementById('phone').value.trim();
+   if(!fullname||!email||!phone||!password){alert('Vui lòng nhập đầy đủ thông tin.');return}
+   if(members.some(m=>m.email===email)){alert('Email đã tồn tại.');return}
+   members.push({fullname,email,phone,password,role:'Member',status:'Active'});
+   localStorage.setItem('fininvest_members',JSON.stringify(members));
+   alert('Đăng ký thành công! Đây là bản demo, dữ liệu được lưu trong trình duyệt.');
+   closeModal();renderMembers();
+ }else{
+   if(email==='admin@fininvest.vn'&&password==='admin123'){
+     closeModal();document.getElementById('home').style.display='none';document.getElementById('admin').classList.add('show');renderMembers();window.scrollTo(0,0);return;
+   }
+   const found=members.find(m=>m.email===email&&m.password===password);
+   if(found){alert('Đăng nhập thành công, chào '+found.fullname+'!');closeModal()}
+   else alert('Sai email hoặc mật khẩu.');
+ }
+});
+function renderMembers(){
+ const members=JSON.parse(localStorage.getItem('fininvest_members')||'[]');
+ document.getElementById('memberCount').textContent=members.length;
+ document.getElementById('membersTable').innerHTML=members.map(m=>`<tr><td>${m.fullname}</td><td>${m.email}</td><td>${m.role}</td><td>${m.status}</td></tr>`).join('')||'<tr><td colspan="4">Chưa có thành viên đăng ký.</td></tr>';
 }
-
-
-/*
-   Cập nhật dữ liệu mỗi 10 giây
-*/
-
-setInterval(
-    loadMarketData,
-    10000
-);
-
-
-/*
-   Load lần đầu
-*/
-
-loadMarketData();
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
-
-function mobileMenu(){
-
-    const nav =
-    document.querySelector(".nav");
-
-    if(nav.style.display === "flex"){
-
-        nav.style.display = "";
-
-    }else{
-
-        nav.style.display = "flex";
-
-        nav.style.position = "absolute";
-
-        nav.style.top = "76px";
-
-        nav.style.left = "0";
-
-        nav.style.right = "0";
-
-        nav.style.background = "#fff";
-
-        nav.style.padding = "20px";
-
-        nav.style.flexDirection = "column";
-
-        nav.style.borderBottom =
-        "1px solid #e3e8ec";
-
-    }
-
-}
-
+function showHome(){document.getElementById('admin').classList.remove('show');document.getElementById('home').style.display='block';window.scrollTo(0,0)}
+renderMembers();
 </script>
-
 </body>
 </html>
