@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VNSTOCK - Vietnam Stock Market</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:#0f1116;color:#d1d4dc;overflow-x:hidden}
+button,input,select{font-family:inherit}button{cursor:pointer}
+.header{height:64px;background:#131722;border-bottom:1px solid #2a2e39;display:flex;align-items:center;padding:0 20px;gap:20px;position:sticky;top:0;z-index:1000}
+.logo{font-size:20px;font-weight:700;color:#26a69a;white-space:nowrap}.logo span{color:#fff}
+.search-box{width:280px;position:relative}.search-box input{width:100%;height:38px;background:#1e222d;border:1px solid #363a45;border-radius:6px;padding:0 40px 0 14px;color:#fff;outline:none}.search-box input:focus{border-color:#2962ff}.search-icon{position:absolute;right:12px;top:10px;color:#787d8a}
+.header-market{display:flex;gap:10px;overflow:hidden}.market-mini{background:#1e222d;border-radius:5px;padding:7px 12px;min-width:110px}.market-mini .name{font-size:11px;color:#8b909d}.market-mini .value{font-size:14px;margin-top:3px}
+.up{color:#26a69a!important}.down{color:#ef5350!important}.flat{color:#b0b3b8!important}
+.header-actions{margin-left:auto;display:flex;gap:8px}.icon-btn{width:38px;height:38px;border:1px solid #363a45;background:#1e222d;color:#d1d4dc;border-radius:6px}.login-btn{height:38px;padding:0 16px;background:#2962ff;color:#fff;border:0;border-radius:5px}
+.app{display:grid;grid-template-columns:250px 1fr 300px;min-height:calc(100vh - 64px)}
+.sidebar{background:#131722;border-right:1px solid #2a2e39;padding:16px 12px}.sidebar-title{color:#787d8a;font-size:11px;text-transform:uppercase;margin:15px 10px 8px}.sidebar-item{padding:10px 12px;border-radius:5px;display:flex;justify-content:space-between;align-items:center;color:#b7bac2;font-size:14px;margin-bottom:3px}.sidebar-item:hover,.sidebar-item.active{background:#1e222d;color:#fff}.sidebar-item .count{font-size:11px;background:#2a2e39;padding:2px 6px;border-radius:10px}.industry{cursor:pointer}
+.main{min-width:0;background:#0f1116}.toolbar{min-height:54px;border-bottom:1px solid #2a2e39;display:flex;align-items:center;gap:8px;padding:8px 14px;flex-wrap:wrap}.symbol-title{font-size:21px;font-weight:600;color:#fff}.symbol-exchange{font-size:11px;color:#787d8a}.toolbar-btn{background:#1e222d;border:1px solid #30343f;color:#b8bbc3;padding:7px 10px;border-radius:4px;font-size:12px}.toolbar-btn.active{background:#2962ff;border-color:#2962ff;color:#fff}.spacer{flex:1}
+.chart-wrapper{height:480px;border-bottom:1px solid #2a2e39;position:relative}.chart-header{height:48px;padding:10px 15px;display:flex;align-items:center;gap:15px}.chart-price{font-size:22px;font-weight:600;color:#fff}.chart-change{font-size:14px}.chart-container{height:410px;padding:0 12px 10px}
+.quick-filter{border-bottom:1px solid #2a2e39;padding:12px 14px;display:flex;gap:7px;flex-wrap:wrap}.filter-title{font-size:12px;color:#787d8a;margin-right:4px;display:flex;align-items:center}.filter{background:#1e222d;color:#b7bac2;border:1px solid #30343f;border-radius:15px;padding:6px 12px;font-size:11px}.filter.active{background:#2962ff;border-color:#2962ff;color:#fff}
+.table-section{padding:15px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h3{color:#fff;font-size:15px}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:right;color:#6f7480;font-weight:normal;padding:9px 6px;border-bottom:1px solid #2a2e39}.table th:first-child,.table td:first-child{text-align:left}.table td{padding:10px 6px;border-bottom:1px solid #20232c;text-align:right}.table tr:hover{background:#171a23}.stock-code{font-weight:700;color:#fff}.star{color:#555b66;margin-right:6px;cursor:pointer}.star.active{color:#f5c542}
+.right-panel{background:#131722;border-left:1px solid #2a2e39}.panel{border-bottom:1px solid #2a2e39;padding:15px}.panel h3{font-size:14px;color:#fff;margin-bottom:13px}.watch-item{display:grid;grid-template-columns:1fr auto;padding:9px 0;border-bottom:1px solid #20232c}.watch-name{color:#fff;font-weight:600}.watch-price{text-align:right}.watch-change{font-size:11px;margin-top:3px}
+.ai-card{background:#1a1e27;border:1px solid #30343f;border-radius:8px;padding:14px}.ai-score{display:flex;align-items:center;gap:14px}.score-circle{width:70px;height:70px;border-radius:50%;border:5px solid #26a69a;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;color:#26a69a}.score-label{font-size:11px;color:#777d89}.score-text{font-size:15px;color:#fff;margin-top:4px}.ai-bars{margin-top:15px}.ai-row{margin-bottom:9px}.ai-row-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}.progress{height:5px;background:#2a2e39;border-radius:5px;overflow:hidden}.progress span{display:block;height:100%;background:#26a69a}
+.portfolio-value{font-size:22px;color:#fff;font-weight:bold}.portfolio-label{color:#787d8a;font-size:11px;margin-bottom:4px}.portfolio-profit{margin-top:5px;font-size:13px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:3000}.modal.show{display:flex}.modal-box{width:400px;max-width:92%;background:#1e222d;border:1px solid #363a45;border-radius:10px;padding:25px}.modal-box h2{color:#fff;margin-bottom:20px}.form-group{margin-bottom:14px}.form-group label{display:block;font-size:12px;color:#8a8f9b;margin-bottom:6px}.form-group input,.form-group select{width:100%;height:42px;border-radius:5px;border:1px solid #363a45;background:#131722;color:#fff;padding:0 12px;outline:none}.form-submit{width:100%;height:42px;border:0;background:#2962ff;color:#fff;border-radius:5px;margin-top:8px}.close-modal{float:right;color:#888;cursor:pointer;font-size:20px}
+@media(max-width:1100px){.app{grid-template-columns:210px 1fr}.right-panel{display:none}}
+@media(max-width:750px){.header{padding:0 10px;gap:8px}.logo{font-size:16px}.search-box{width:150px}.header-market{display:none}.app{display:block}.sidebar{display:none}.chart-wrapper{height:400px}.chart-container{height:330px}.toolbar{overflow-x:auto;flex-wrap:nowrap}.symbol-title{font-size:18px}.table-section{overflow-x:auto}.table{min-width:700px}}
+::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:#131722}::-webkit-scrollbar-thumb{background:#363a45;border-radius:10px}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="logo">VN<span>STOCK</span></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="Tìm mã cổ phiếu..." onkeyup="searchStock()"><span class="search-icon">⌕</span></div>
+<div class="header-market">
+<div class="market-mini"><div class="name">VN-INDEX</div><div class="value up">1,563.91 ▲ 0.82%</div></div>
+<div class="market-mini"><div class="name">VN30</div><div class="value up">1,721.24 ▲ 0.76%</div></div>
+<div class="market-mini"><div class="name">HNX</div><div class="value down">257.31 ▼ 0.21%</div></div>
+<div class="market-mini"><div class="name">UPCOM</div><div class="value up">102.18 ▲ 0.35%</div></div>
+</div>
+<div class="header-actions"><button class="icon-btn" onclick="showAlert()">🔔</button><button class="login-btn" onclick="openModal()">Đăng ký</button></div>
+</header>
+
+<div class="app">
+<aside class="sidebar">
+<div class="sidebar-title">Thị trường</div>
+<div class="sidebar-item active"><span>📊 Tổng quan</span></div>
+<div class="sidebar-item"><span>🔥 Top tăng giá</span></div>
+<div class="sidebar-item"><span>🔻 Top giảm giá</span></div>
+<div class="sidebar-item"><span>💰 Thanh khoản cao</span></div>
+<div class="sidebar-item"><span>📈 Breakout</span></div>
+<div class="sidebar-title">Danh mục ngành</div>
+<div class="sidebar-item industry" onclick="filterIndustry('Ngân hàng')"><span>🏦 Ngân hàng</span><span class="count">27</span></div>
+<div class="sidebar-item industry" onclick="filterIndustry('Chứng khoán')"><span>💹 Chứng khoán</span><span class="count">24</span></div>
+<div class="sidebar-item industry" onclick="filterIndustry('Bất động sản')"><span>🏢 Bất động sản</span><span class="count">48</span></div>
+<div class="sidebar-item industry" onclick="filterIndustry('Thép')"><span>🏭 Thép</span><span class="count">18</span></div>
+<div class="sidebar-item industry" onclick="filterIndustry('Công nghệ')"><span>💻 Công nghệ</span><span class="count">16</span></div>
+<div class="sidebar-item industry" onclick="filterIndustry('Dầu khí')"><span>🛢️ Dầu khí</span><span class="count">13</span></div>
+<div class="sidebar-title">Cá nhân</div>
+<div class="sidebar-item"><span>⭐ Watchlist</span></div>
+<div class="sidebar-item"><span>💼 Danh mục</span></div>
+<div class="sidebar-item"><span>🔔 Cảnh báo</span></div>
+</aside>
+
+<main class="main">
+<div class="toolbar">
+<div><div class="symbol-title" id="currentSymbol">FPT</div><div class="symbol-exchange">HOSE · Công nghệ</div></div>
+<button class="toolbar-btn active" onclick="setTimeframe('1D',this)">1D</button>
+<button class="toolbar-btn" onclick="setTimeframe('1W',this)">1W</button>
+<button class="toolbar-btn" onclick="setTimeframe('1M',this)">1M</button>
+<button class="toolbar-btn" onclick="setTimeframe('3M',this)">3M</button>
+<button class="toolbar-btn" onclick="setTimeframe('1Y',this)">1Y</button>
+<div class="spacer"></div><button class="toolbar-btn">MA</button><button class="toolbar-btn">RSI</button><button class="toolbar-btn">MACD</button>
+</div>
+
+<section class="chart-wrapper">
+<div class="chart-header"><div class="chart-price" id="chartPrice">128.50</div><div class="chart-change up" id="chartChange">+2.50 (+1.98%)</div></div>
+<div class="chart-container"><canvas id="stockChart"></canvas></div>
+</section>
+
+<div class="quick-filter">
+<div class="filter-title">Bộ lọc nhanh:</div>
+<button class="filter active" onclick="quickFilter('all',this)">Tất cả</button>
+<button class="filter" onclick="quickFilter('up',this)">🚀 Tăng mạnh</button>
+<button class="filter" onclick="quickFilter('down',this)">🔻 Giảm mạnh</button>
+<button class="filter" onclick="quickFilter('volume',this)">💰 Thanh khoản</button>
+<button class="filter" onclick="quickFilter('breakout',this)">📈 Breakout</button>
+<button class="filter" onclick="quickFilter('dividend',this)">💵 Giá thấp</button>
+</div>
+
+<section class="table-section">
+<div class="section-title"><h3>Danh sách cổ phiếu</h3><span style="font-size:11px;color:#777">Dữ liệu mẫu</span></div>
+<table class="table"><thead><tr><th>Mã</th><th>Giá</th><th>+/-</th><th>%</th><th>TC</th><th>KL</th><th>GTGD</th><th>Ngành</th></tr></thead><tbody id="stockTable"></tbody></table>
+</section>
+</main>
+
+<aside class="right-panel">
+<div class="panel"><h3>⭐ Watchlist</h3><div id="watchlist"></div></div>
+<div class="panel"><h3>🤖 AI Stock Score</h3><div class="ai-card"><div class="ai-score"><div class="score-circle">86</div><div><div class="score-label">Đánh giá FPT</div><div class="score-text">TÍCH CỰC</div></div></div><div class="ai-bars">
+<div class="ai-row"><div class="ai-row-top"><span>Xu hướng</span><span>91%</span></div><div class="progress"><span style="width:91%"></span></div></div>
+<div class="ai-row"><div class="ai-row-top"><span>Tài chính</span><span>88%</span></div><div class="progress"><span style="width:88%"></span></div></div>
+<div class="ai-row"><div class="ai-row-top"><span>Định giá</span><span>76%</span></div><div class="progress"><span style="width:76%"></span></div></div>
+<div class="ai-row"><div class="ai-row-top"><span>Thanh khoản</span><span>94%</span></div><div class="progress"><span style="width:94%"></span></div></div>
+</div></div></div>
+<div class="panel"><h3>💼 Danh mục đầu tư</h3><div class="portfolio-label">Tổng giá trị</div><div class="portfolio-value">1.250.000.000 ₫</div><div class="portfolio-profit up">+82.500.000 ₫ (+7.06%)</div></div>
+<div class="panel"><h3>🌐 Thị trường</h3>
+<div class="watch-item"><div>VN-Index</div><div class="watch-price up">1,563.91</div></div>
+<div class="watch-item"><div>VN30</div><div class="watch-price up">1,721.24</div></div>
+<div class="watch-item"><div>HNX</div><div class="watch-price down">257.31</div></div>
+<div class="watch-item"><div>UPCOM</div><div class="watch-price up">102.18</div></div>
+</div>
+</aside>
+</div>
+
+<div class="modal" id="loginModal">
+<div class="modal-box"><span class="close-modal" onclick="closeModal()">×</span><h2>Đăng ký tài khoản</h2>
+<div class="form-group"><label>Họ và tên</label><input type="text" id="customerName" placeholder="Nguyễn Văn A"></div>
+<div class="form-group"><label>Email</label><input type="email" id="customerEmail" placeholder="email@example.com"></div>
+<div class="form-group"><label>Số điện thoại</label><input type="tel" id="customerPhone" placeholder="09xxxxxxxx"></div>
+<div class="form-group"><label>Mật khẩu</label><input type="password" id="customerPassword" placeholder="••••••••"></div>
+<div class="form-group"><label>Gói tài khoản</label><select><option>Free - Miễn phí</option><option>Pro - 199.000đ/tháng</option><option>Premium - 499.000đ/tháng</option></select></div>
+<button class="form-submit" onclick="registerUser()">Đăng ký tài khoản</button>
+</div>
+</div>
+
+<script>
+const stocks=[
+{code:"FPT",price:128.5,change:2.5,percent:1.98,volume:"5.21M",value:"668B",industry:"Công nghệ"},
+{code:"VCB",price:97.2,change:1.1,percent:1.14,volume:"3.12M",value:"303B",industry:"Ngân hàng"},
+{code:"TCB",price:36.8,change:-0.4,percent:-1.08,volume:"12.8M",value:"471B",industry:"Ngân hàng"},
+{code:"MBB",price:28.9,change:0.8,percent:2.85,volume:"22.4M",value:"646B",industry:"Ngân hàng"},
+{code:"SSI",price:31.5,change:1.3,percent:4.30,volume:"31.2M",value:"984B",industry:"Chứng khoán"},
+{code:"VND",price:18.9,change:0.9,percent:5.00,volume:"42.1M",value:"791B",industry:"Chứng khoán"},
+{code:"HPG",price:27.4,change:-0.6,percent:-2.14,volume:"19.5M",value:"534B",industry:"Thép"},
+{code:"VHM",price:82.4,change:1.4,percent:1.73,volume:"7.2M",value:"593B",industry:"Bất động sản"},
+{code:"VIC",price:108.2,change:3.2,percent:3.05,volume:"8.1M",value:"876B",industry:"Bất động sản"},
+{code:"GAS",price:74.6,change:-1.2,percent:-1.58,volume:"3.4M",value:"254B",industry:"Dầu khí"}
+];
+
+function renderTable(data=stocks){
+const table=document.getElementById("stockTable");table.innerHTML="";
+data.forEach(stock=>{
+const row=document.createElement("tr");
+const cls=stock.change>0?"up":stock.change<0?"down":"flat";
+row.innerHTML=`<td><span class="star" onclick="toggleStar(this)">☆</span><span class="stock-code" onclick="selectStock('${stock.code}')" style="cursor:pointer">${stock.code}</span></td>
+<td class="${cls}">${stock.price.toFixed(2)}</td><td class="${cls}">${stock.change>0?"+":""}${stock.change.toFixed(2)}</td>
+<td class="${cls}">${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%</td><td>${(stock.price-stock.change).toFixed(2)}</td>
+<td>${stock.volume}</td><td>${stock.value}</td><td>${stock.industry}</td>`;
+table.appendChild(row);
+});
+}
+function renderWatchlist(){
+const list=document.getElementById("watchlist");const selected=["FPT","VCB","SSI","HPG","VIC"];list.innerHTML="";
+selected.forEach(code=>{const stock=stocks.find(x=>x.code===code);if(!stock)return;const cls=stock.change>0?"up":"down";
+list.innerHTML+=`<div class="watch-item"><div><div class="watch-name">${stock.code}</div><div style="font-size:10px;color:#707580">${stock.industry}</div></div><div><div class="watch-price ${cls}">${stock.price.toFixed(2)}</div><div class="watch-change ${cls}">${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%</div></div></div>`;
+});
+}
+let chart;
+function generateChart(){
+const ctx=document.getElementById("stockChart");const labels=[],values=[];let price=112;
+for(let i=0;i<80;i++){labels.push(i);price+=(Math.random()-.45)*2.2;values.push(Number(price.toFixed(2)))}
+chart=new Chart(ctx,{type:"line",data:{labels,datasets:[{label:"FPT",data:values,borderWidth:2,pointRadius:0,tension:.2,fill:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:"index"},plugins:{legend:{display:false}},scales:{x:{grid:{color:"#20232c"},ticks:{color:"#626774",maxTicksLimit:8}},y:{position:"right",grid:{color:"#20232c"},ticks:{color:"#626774"}}}}});
+}
+function selectStock(code){
+const stock=stocks.find(x=>x.code===code);if(!stock)return;
+document.getElementById("currentSymbol").innerText=stock.code;
+document.getElementById("chartPrice").innerText=stock.price.toFixed(2);
+const change=document.getElementById("chartChange");
+change.innerText=`${stock.change>0?"+":""}${stock.change.toFixed(2)} (${stock.percent>0?"+":""}${stock.percent.toFixed(2)}%)`;
+change.className="chart-change "+(stock.change>0?"up":"down");
+updateChart(stock);
+}
+function updateChart(stock){
+if(!chart)return;const values=[];let price=stock.price*.9;
+for(let i=0;i<80;i++){price+=(Math.random()-.45)*stock.price*.015;values.push(Number(price.toFixed(2)))}values[79]=stock.price;
+chart.data.datasets[0].label=stock.code;chart.data.datasets[0].data=values;chart.update();
+}
+function setTimeframe(time,button){
+document.querySelectorAll(".toolbar-btn").forEach(btn=>{if(["1D","1W","1M","3M","1Y"].includes(btn.innerText))btn.classList.remove("active")});
+button.classList.add("active");
+}
+function filterIndustry(industry){renderTable(stocks.filter(x=>x.industry===industry))}
+function quickFilter(type,button){
+document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));button.classList.add("active");let result=[...stocks];
+if(type==="up")result=stocks.filter(x=>x.percent>=2);
+if(type==="down")result=stocks.filter(x=>x.percent<=-1);
+if(type==="volume")result=stocks.filter(x=>parseFloat(x.volume)>=10);
+if(type==="breakout")result=stocks.filter(x=>x.percent>=3);
+if(type==="dividend")result=stocks.filter(x=>x.price<50);
+renderTable(result);
+}
+function searchStock(){
+const keyword=document.getElementById("searchInput").value.toUpperCase();
+renderTable(stocks.filter(x=>x.code.includes(keyword)||x.industry.toUpperCase().includes(keyword)));
+}
+function toggleStar(el){el.classList.toggle("active");el.innerText=el.classList.contains("active")?"★":"☆"}
+function openModal(){document.getElementById("loginModal").classList.add("show")}
+function closeModal(){document.getElementById("loginModal").classList.remove("show")}
+function registerUser(){
+const name=document.getElementById("customerName").value,email=document.getElementById("customerEmail").value,phone=document.getElementById("customerPhone").value;
+if(!name||!email||!phone){alert("Vui lòng nhập đầy đủ thông tin.");return}
+alert("Đăng ký thành công!\n\nXin chào "+name);closeModal();
+}
+function showAlert(){alert("🔔 Hệ thống cảnh báo\n\nBạn chưa có cảnh báo giá nào.")}
+renderTable();renderWatchlist();generateChart();
+</script>
+</body>
+</html>
