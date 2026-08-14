@@ -15,6 +15,90 @@ header{height:76px;background:#fff;border-bottom:1px solid var(--line);position:
 .hero{background:#fff;padding:28px 0;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}.hero-main{height:420px;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#284d64,#071a2b);color:#fff;display:flex;align-items:end;padding:34px}.tag{font-size:10px;color:#28c992;font-weight:800;letter-spacing:.6px;margin-bottom:9px}.hero h1{font-size:35px;line-height:1.15;max-width:720px;margin-bottom:12px}.hero p{font-size:14px;color:#ccd9e0;max-width:690px}.side{display:grid;gap:20px}.side-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}.side-img,.news-img{height:105px;background:linear-gradient(135deg,#dce7eb,#849ba8)}.side-body{padding:13px}.side-body h3{font-size:14px;line-height:1.35}
 .section{padding:48px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}.section-title{font-size:25px}.desc{font-size:12px;color:var(--muted)}.more{font-size:12px;color:var(--green);font-weight:800}
 .news-layout{display:grid;grid-template-columns:2fr 1fr;gap:22px}.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.news-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}.news-body{padding:15px}.news-body h3{font-size:15px;line-height:1.35;margin:5px 0 7px}.news-body p{font-size:12px;color:var(--muted)}.latest{background:#fff;border:1px solid var(--line);padding:17px;border-radius:6px}.latest h3{font-size:16px;border-bottom:2px solid var(--navy);padding-bottom:12px}.latest-item{padding:13px 0;border-bottom:1px solid var(--line)}.latest-item:last-child{border:0}.latest-item span{font-size:10px;color:var(--green)}.latest-item h4{font-size:12px;margin-top:3px}
+/* ===== BANNER LAYOUT ===== */
+.top-banner-section{padding:18px 0 24px;background:var(--bg)}
+.top-banner-wrap{max-width:1500px;margin:auto;padding:0 20px}
+.top-banner-viewport{position:relative;overflow:hidden;border-radius:8px;background:#071a2b;box-shadow:0 4px 18px #071a2b18}
+.top-banner-track{display:flex;transition:transform .55s ease}
+.top-banner-slide{min-width:100%;height:250px;position:relative;display:block;overflow:hidden}
+.top-banner-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.top-banner-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#071a2bcc,transparent 65%)}
+.top-banner-copy{position:absolute;z-index:2;left:46px;top:50%;transform:translateY(-50%);color:#fff}
+.top-banner-copy small{font-size:10px;letter-spacing:1px;font-weight:800;color:#7de0bb}
+.top-banner-copy h2{font-size:30px;line-height:1.15;margin:6px 0}
+.top-banner-copy p{font-size:12px;color:#d6e1e6}
+.top-banner-arrow{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid #ffffff44;border-radius:50%;background:#071a2bcc;color:#fff;font-size:24px;cursor:pointer}
+.top-banner-prev{left:18px}.top-banner-next{right:18px}
+.top-banner-dots{position:absolute;z-index:4;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px}
+.top-banner-dot{width:8px;height:8px;border:0;border-radius:50%;background:#ffffff88;padding:0;cursor:pointer}
+.top-banner-dot.active{background:#fff}
+
+.page-with-side-banners{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:150px minmax(0,1280px) 150px;gap:20px;padding:0 20px}
+.page-main-column{min-width:0}
+.side-banner-column{display:flex;flex-direction:column;gap:18px;padding-top:28px}
+.square-banner{display:block;width:150px;height:150px;border-radius:7px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.square-banner img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
+.square-banner:hover img{transform:scale(1.04)}
+
+.api-panel{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:20px}
+.api-panel h3{font-size:17px;margin-bottom:5px}
+.api-help{font-size:11px;color:var(--muted);margin-bottom:16px}
+.api-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.api-field label{display:block;font-size:10px;font-weight:800;margin-bottom:5px}
+.api-field input,.api-field select{width:100%;height:38px;border:1px solid var(--line);border-radius:4px;padding:0 10px;font-size:12px}
+.api-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.api-btn{border:0;border-radius:4px;padding:9px 13px;font-size:11px;font-weight:800;cursor:pointer}
+.api-btn.primary{background:var(--green);color:#fff}.api-btn.secondary{background:#eef2f4;color:#344653}
+.api-status{font-size:11px;margin-top:10px}.api-status.ok{color:var(--green)}.api-status.err{color:var(--red)}
+.market-api-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 22px}
+.market-api-card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:13px}
+.market-api-card small{display:block;font-size:9px;color:var(--muted);font-weight:700}
+.market-api-card strong{display:block;font-size:19px;margin-top:2px}
+.market-api-card span{font-size:10px;font-weight:800}
+.market-api-card .positive{color:var(--green)}.market-api-card .negative{color:var(--red)}
+@media(max-width:1400px){
+  .page-with-side-banners{grid-template-columns:100px minmax(0,1280px) 100px}
+  .square-banner{width:100px;height:100px}
+}
+@media(max-width:1050px){
+  .page-with-side-banners{display:block;padding:0 20px}
+  .side-banner-column{display:none}
+}
+@media(max-width:650px){
+  .top-banner-slide{height:190px}
+  .top-banner-copy{left:35px}.top-banner-copy h2{font-size:21px}.top-banner-copy p{display:none}
+  .market-api-strip{grid-template-columns:1fr 1fr}
+  .api-grid{grid-template-columns:1fr}
+}
+
+/* Banner quảng cáo / đối tác */
+.banner-section{padding:0 0 48px}
+.banner-slider{position:relative;max-width:1280px;margin:auto;padding:0 20px}
+.banner-viewport{position:relative;overflow:hidden;border-radius:8px;background:#0c263c}
+.banner-track{display:flex;transition:transform .55s ease}
+.banner-slide{min-width:100%;position:relative;display:block;aspect-ratio:4/1;overflow:hidden}
+.banner-slide img{width:100%;height:100%;display:block;object-fit:cover}
+.banner-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#071a2b99,transparent 55%);pointer-events:none}
+.banner-content{position:absolute;z-index:2;left:34px;top:50%;transform:translateY(-50%);color:#fff;max-width:48%}
+.banner-content small{font-size:10px;font-weight:800;letter-spacing:1px;color:#7de0bb}
+.banner-content h3{font-size:26px;line-height:1.15;margin:6px 0}
+.banner-content p{font-size:12px;color:#d8e4e9}
+.banner-dots{position:absolute;z-index:3;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px}
+.banner-dot{width:8px;height:8px;border:0;border-radius:50%;background:#ffffff88;cursor:pointer;padding:0}
+.banner-dot.active{background:#fff}
+.banner-arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #ffffff44;border-radius:50%;background:#071a2bcc;color:#fff;font-size:22px;cursor:pointer;display:grid;place-items:center}
+.banner-prev{left:34px}.banner-next{right:34px}
+.banner-slide:focus{outline:2px solid #fff;outline-offset:-2px}
+@media(max-width:650px){
+  .banner-section{padding-bottom:32px}
+  .banner-slide{aspect-ratio:16/8}
+  .banner-content{left:20px;max-width:70%}
+  .banner-content h3{font-size:18px}
+  .banner-content p{display:none}
+  .banner-arrow{width:32px;height:32px;font-size:18px}
+  .banner-prev{left:12px}.banner-next{right:12px}
+}
+
 .recommend{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.rec{border:1px solid var(--line);border-radius:6px;padding:19px}.rec-top{display:flex;justify-content:space-between}.symbol{font-size:25px;font-weight:900}.rating{font-size:10px;color:var(--green);background:#e8f8f2;padding:5px 8px;border-radius:4px;font-weight:800}.rec h3{font-size:16px;margin:13px 0 4px}.rec p{font-size:12px;color:var(--muted)}.prices{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:16px;padding-top:13px;font-size:11px}.prices strong{font-size:18px}.target{color:var(--green)}
 .opportunity{background:var(--navy);color:#fff}.op-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.op{background:#ffffff08;border:1px solid #ffffff12;border-radius:6px;padding:21px}.op-icon{font-size:25px;margin-bottom:10px}.op h3{font-size:15px}.op p{font-size:11px;color:#a9bbc5;margin-top:5px}
 .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.edu{background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px}.num{font-size:35px;font-weight:900;color:#dfe5e9}.edu h3{font-size:17px;margin:7px 0}.edu p{font-size:12px;color:var(--muted)}.edu a{display:inline-block;margin-top:15px;color:var(--green);font-size:12px;font-weight:800}
@@ -71,8 +155,52 @@ footer{background:#061520;color:#fff;padding:45px 0 20px}.foot{display:grid;grid
 </div>
 </section>
 
+
+<!-- TOP BANNER SLIDER -->
+<section class="top-banner-section" aria-label="Banner quảng cáo">
+  <div class="top-banner-wrap">
+    <div class="top-banner-viewport">
+      <div class="top-banner-track" id="topBannerTrack">
+        <a class="top-banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1800&q=85" alt="Banner 1">
+          <div class="top-banner-copy"><small>FININVEST · ĐỐI TÁC</small><h2>Cơ hội đầu tư nổi bật</h2><p>Nhấn để xem chi tiết</p></div>
+        </a>
+        <a class="top-banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1800&q=85" alt="Banner 2">
+          <div class="top-banner-copy"><small>THỊ TRƯỜNG</small><h2>Cập nhật dữ liệu & xu hướng</h2><p>Khám phá ngay</p></div>
+        </a>
+        <a class="top-banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85" alt="Banner 3">
+          <div class="top-banner-copy"><small>FININVEST</small><h2>Sản phẩm tài chính dành cho nhà đầu tư</h2><p>Xem thông tin</p></div>
+        </a>
+      </div>
+      <button class="top-banner-arrow top-banner-prev" id="topBannerPrev" type="button" aria-label="Banner trước">‹</button>
+      <button class="top-banner-arrow top-banner-next" id="topBannerNext" type="button" aria-label="Banner tiếp">›</button>
+      <div class="top-banner-dots" id="topBannerDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER HAI BÊN + NỘI DUNG -->
+<div class="page-with-side-banners">
+  <aside class="side-banner-column side-banner-left" aria-label="Banner bên trái">
+    <a class="square-banner" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+      <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=85" alt="Banner bên trái">
+    </a>
+    <a class="square-banner" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=85" alt="Banner bên trái 2">
+    </a>
+  </aside>
+  <div class="page-main-column">
 <section class="section" id="news">
 <div class="container">
+<div class="market-api-strip" id="marketApiStrip">
+  <div class="market-api-card"><small>VN-INDEX</small><strong id="apiVNINDEX">--</strong><span id="apiVNINDEXChange">--</span></div>
+  <div class="market-api-card"><small>VN30</small><strong id="apiVN30">--</strong><span id="apiVN30Change">--</span></div>
+  <div class="market-api-card"><small>HNX-INDEX</small><strong id="apiHNX">--</strong><span id="apiHNXChange">--</span></div>
+  <div class="market-api-card"><small>UPCOM</small><strong id="apiUPCOM">--</strong><span id="apiUPCOMChange">--</span></div>
+</div>
+
 <div class="section-head"><div><h2 class="section-title">Tin tức thị trường</h2><p class="desc">Thông tin tài chính được cập nhật và chọn lọc.</p></div><a class="more" href="#">Xem tất cả →</a></div>
 <div class="news-layout">
 <div class="news-grid">
@@ -89,6 +217,43 @@ footer{background:#061520;color:#fff;padding:45px 0 20px}.foot{display:grid;grid
 </aside>
 </div>
 </div>
+</section>
+
+<!-- Banner hình ảnh chạy slide, mỗi banner có thể trỏ tới website khác -->
+<section class="banner-section" aria-label="Banner đối tác">
+  <div class="banner-slider">
+    <div class="banner-viewport">
+      <div class="banner-track" id="bannerTrack">
+        <a class="banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1600&q=80" alt="Banner cơ hội đầu tư">
+          <div class="banner-content">
+            <small>ĐỐI TÁC · FININVEST</small>
+            <h3>Cơ hội đầu tư mới</h3>
+            <p>Nhấn để xem thông tin chi tiết trên website đối tác.</p>
+          </div>
+        </a>
+        <a class="banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80" alt="Banner thị trường chứng khoán">
+          <div class="banner-content">
+            <small>THỊ TRƯỜNG</small>
+            <h3>Cập nhật thị trường mỗi ngày</h3>
+            <p>Thay link và hình ảnh này bằng banner của bạn.</p>
+          </div>
+        </a>
+        <a class="banner-slide" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80" alt="Banner dịch vụ tài chính">
+          <div class="banner-content">
+            <small>DỊCH VỤ TÀI CHÍNH</small>
+            <h3>Khám phá sản phẩm phù hợp</h3>
+            <p>Banner có thể dẫn người dùng sang bất kỳ website nào.</p>
+          </div>
+        </a>
+      </div>
+      <button class="banner-arrow banner-prev" id="bannerPrev" type="button" aria-label="Banner trước">‹</button>
+      <button class="banner-arrow banner-next" id="bannerNext" type="button" aria-label="Banner tiếp">›</button>
+      <div class="banner-dots" id="bannerDots" aria-label="Chọn banner"></div>
+    </div>
+  </div>
 </section>
 
 <section class="section recommend" id="recommend">
@@ -126,6 +291,17 @@ footer{background:#061520;color:#fff;padding:45px 0 20px}.foot{display:grid;grid
 </section>
 
 <section class="account"><div class="container"><div class="account-box"><div><h2>Sẵn sàng bắt đầu hành trình đầu tư?</h2><p>Tìm hiểu thị trường, lựa chọn công ty chứng khoán phù hợp và mở tài khoản đầu tư trực tuyến.</p></div><a class="account-btn" href="#" onclick="openModal('register')">ĐĂNG KÝ THÀNH VIÊN</a></div></div></section>
+
+  </div>
+  <aside class="side-banner-column side-banner-right" aria-label="Banner bên phải">
+    <a class="square-banner" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=700&q=85" alt="Banner bên phải">
+    </a>
+    <a class="square-banner" href="https://example.com/" target="_blank" rel="noopener noreferrer">
+      <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=700&q=85" alt="Banner bên phải 2">
+    </a>
+  </aside>
+</div>
 </main>
 
 <section class="admin" id="admin">
@@ -140,7 +316,25 @@ footer{background:#061520;color:#fff;padding:45px 0 20px}.foot{display:grid;grid
         <div class="stat"><small>KHUYẾN NGHỊ</small><b>245</b></div>
         <div class="stat"><small>KHÓA HỌC</small><b>32</b></div>
       </div>
-      <div class="table"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th></tr></thead><tbody id="membersTable"></tbody></table></div>
+      
+<div class="api-panel">
+  <h3>Kết nối API chỉ số thị trường</h3>
+  <p class="api-help">Nhập endpoint API của nhà cung cấp dữ liệu. Không nên đặt API secret thật trực tiếp trong HTML production; nên gọi qua backend/proxy.</p>
+  <div class="api-grid">
+    <div class="api-field"><label>API Endpoint</label><input id="marketApiUrl" placeholder="https://api.example.com/market/indices"></div>
+    <div class="api-field"><label>HTTP Method</label><select id="marketApiMethod"><option>GET</option><option>POST</option></select></div>
+    <div class="api-field"><label>API Key / Token</label><input id="marketApiToken" type="password" placeholder="Nhập token nếu có"></div>
+    <div class="api-field"><label>Chu kỳ cập nhật (giây)</label><input id="marketApiInterval" type="number" min="5" value="15"></div>
+  </div>
+  <div class="api-actions">
+    <button class="api-btn primary" type="button" onclick="saveMarketApiConfig()">Lưu cấu hình</button>
+    <button class="api-btn secondary" type="button" onclick="testMarketApi()">Test API</button>
+    <button class="api-btn secondary" type="button" onclick="refreshMarketData()">Cập nhật ngay</button>
+  </div>
+  <div class="api-status" id="apiStatus">Chưa kết nối API.</div>
+</div>
+
+<div class="table"><table><thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th></tr></thead><tbody id="membersTable"></tbody></table></div>
     </div>
   </div>
 </section>
@@ -231,6 +425,57 @@ function renderMembers(){
 }
 function showHome(){document.getElementById('admin').classList.remove('show');document.getElementById('home').style.display='block';window.scrollTo(0,0)}
 renderMembers();
+// Banner slider
+(function(){
+  const track = document.getElementById('bannerTrack');
+  const dots = document.getElementById('bannerDots');
+  const prev = document.getElementById('bannerPrev');
+  const next = document.getElementById('bannerNext');
+  if(!track || !dots) return;
+
+  const slides = Array.from(track.querySelectorAll('.banner-slide'));
+  let current = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', 'Đến banner ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i, true));
+    dots.appendChild(dot);
+  });
+
+  const dotItems = Array.from(dots.children);
+
+  function goTo(index, manual = false){
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotItems.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    if(manual) restart();
+  }
+
+  function start(){
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  function restart(){
+    clearInterval(timer);
+    start();
+  }
+
+  prev.addEventListener('click', () => goTo(current - 1, true));
+  next.addEventListener('click', () => goTo(current + 1, true));
+
+  const viewport = track.parentElement;
+  viewport.addEventListener('mouseenter', () => clearInterval(timer));
+  viewport.addEventListener('mouseleave', start);
+  viewport.addEventListener('focusin', () => clearInterval(timer));
+  viewport.addEventListener('focusout', start);
+
+  start();
+})();
+
 </script>
 </body>
 </html>
