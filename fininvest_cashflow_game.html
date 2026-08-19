@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FININVEST CashFlow Simulator</title>
+<style>
+:root{--navy:#071a2b;--blue:#0d2b43;--green:#0aa66d;--gold:#c7a15a;--bg:#eef2f4;--card:#fff;--line:#dbe3e8;--muted:#6f7e88;--red:#d9534f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#182833;font:14px Arial,sans-serif}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:20px}.logo span{color:var(--gold)}.phase{font-size:11px;color:#c8d4db}
+.wrap{max-width:1250px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 4px 18px #071a2b0c}
+h1,h2,h3{margin:0 0 8px}.muted{color:var(--muted);font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.stat{background:#f8fafb;border:1px solid var(--line);border-radius:9px;padding:12px}.stat small{display:block;color:var(--muted);font-size:10px}.stat strong{display:block;font-size:20px;margin-top:5px}
+.layout{display:grid;grid-template-columns:1.5fr .8fr;gap:18px}.board{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:15px}.cell{min-height:58px;border:1px solid var(--line);border-radius:7px;background:#fafbfc;padding:6px;font-size:9px}.cell.active{border:2px solid var(--gold);background:#fff8e8}.token{float:right;width:12px;height:12px;border-radius:50%;background:var(--navy);border:2px solid #fff}
+.progress{height:9px;background:#e5eaed;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green);width:0}
+.event{margin-top:15px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#fbfcfd}.type{font-size:10px;font-weight:900;color:var(--green);letter-spacing:.8px}.event h3{font-size:21px;margin-top:5px}.event p{color:#42535e;line-height:1.5}
+.actions,.choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:800}.primary{background:var(--green);color:#fff}.dark{background:var(--navy);color:#fff}.light{background:#edf2f4;color:#243743}.danger{background:#fbe8e7;color:#a3322e}.choice{flex:1;min-width:190px;text-align:left;border:1px solid var(--line);background:#fff;padding:12px;border-radius:8px}.choice:hover{border-color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:9px;border-bottom:1px solid var(--line);text-align:left}th{font-size:10px;color:var(--muted)}.log{max-height:280px;overflow:auto}.log div{padding:8px 0;border-bottom:1px solid #edf0f2;font-size:11px}
+.modal{position:fixed;inset:0;background:#071a2bcc;display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalbox{background:#fff;max-width:620px;width:100%;border-radius:14px;padding:22px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:10px;font-weight:800;margin-bottom:5px}.field input,.field select{width:100%;padding:10px;border:1px solid var(--line);border-radius:7px}
+#game{display:none}@media(max-width:850px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.board{grid-template-columns:repeat(5,1fr)}.form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="logo">FININVEST <span>CashFlow Simulator</span></div><div class="phase" id="phase">RAT RACE</div></header>
+<div class="wrap">
+<section id="setup" class="card">
+<h1>CashFlow Simulator</h1>
+<p class="muted">Game mô phỏng giáo dục tài chính nguyên bản, lấy cảm hứng từ các khái niệm cash flow, tài sản, nợ và tự do tài chính.</p>
+<div class="form" style="margin-top:16px">
+<div class="field"><label>TÊN NGƯỜI CHƠI</label><input id="name" value="Nhà đầu tư"></div>
+<div class="field"><label>TIỀN MẶT BAN ĐẦU</label><select id="start"><option value="10000">$10,000</option><option value="20000">$20,000</option><option value="5000">$5,000</option></select></div>
+</div>
+<div class="actions"><button class="btn primary" onclick="startGame()">Bắt đầu chơi</button></div>
+</section>
+
+<section id="game">
+<div class="stats">
+<div class="stat"><small>TIỀN MẶT</small><strong id="cash">$0</strong></div>
+<div class="stat"><small>THU NHẬP THỤ ĐỘNG</small><strong id="passive">$0</strong></div>
+<div class="stat"><small>CHI PHÍ / THÁNG</small><strong id="expense">$0</strong></div>
+<div class="stat"><small>CASH FLOW / THÁNG</small><strong id="flow">$0</strong></div>
+</div>
+<div class="layout">
+<main class="card">
+<div style="display:flex;justify-content:space-between;gap:10px"><div><h2>Rat Race</h2><div class="muted">Mục tiêu: thu nhập thụ động vượt chi phí hàng tháng.</div></div><b id="goal">0%</b></div>
+<div class="progress" style="margin-top:12px"><i id="bar"></i></div>
+<div class="board" id="board"></div>
+<div class="actions"><button id="roll" class="btn primary" onclick="roll()">Gieo xúc xắc</button><button class="btn light" onclick="financials()">Financial Statement</button><button class="btn light" onclick="location.reload()">Chơi lại</button></div>
+<div class="event" id="event"><div class="type">READY</div><h3>Đến lượt bạn</h3><p>Gieo xúc xắc và bắt đầu xây dựng dòng tiền.</p></div>
+</main>
+<aside>
+<div class="card"><h3>Financial Statement</h3><table>
+<tr><td>Lương</td><td id="salary">$0</td></tr><tr><td>Passive Income</td><td id="passive2">$0</td></tr>
+<tr><td>Expenses</td><td id="expense2">$0</td></tr><tr><td>Tài sản</td><td id="assets">$0</td></tr><tr><td>Nợ</td><td id="debt">$0</td></tr>
+</table></div>
+<div class="card" style="margin-top:18px"><h3>Nhật ký</h3><div class="log" id="log"></div></div>
+</aside>
+</div>
+</section>
+</div>
+<div class="modal" id="modal"><div class="modalbox" id="modalbox"></div></div>
+
+<script>
+const spaces=[
+["PAYDAY","pay"],["SMALL DEAL","small"],["DOODAD","doodad"],["MARKET","market"],["PAYDAY","pay"],
+["BIG DEAL","big"],["BABY","baby"],["MARKET","market"],["PAYDAY","pay"],["CHARITY","charity"],
+["SMALL DEAL","small"],["DOWNSIZED","down"],["PAYDAY","pay"],["BIG DEAL","big"],["DOODAD","doodad"],
+["MARKET","market"],["PAYDAY","pay"],["SMALL DEAL","small"],["BABY","baby"],["BIG DEAL","big"]
+];
+let s={cash:0,salary:2500,passive:0,expense:1500,assets:0,debt:0,pos:0,phase:"rat",logs:[]};
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+function startGame(){s.cash=+document.getElementById("start").value;s.logs=[];document.getElementById("setup").style.display="none";document.getElementById("game").style.display="block";log("Bắt đầu với "+money(s.cash)+".");update()}
+function board(){document.getElementById("board").innerHTML=spaces.map((x,i)=>`<div class="cell ${i===s.pos?"active":""}"><span>${i+1}</span><br><b>${x[0]}</b>${i===s.pos?'<span class="token"></span>':""}</div>`).join("")}
+function update(){let f=s.salary+s.passive-s.expense;document.getElementById("cash").textContent=money(s.cash);document.getElementById("passive").textContent=money(s.passive);document.getElementById("expense").textContent=money(s.expense);document.getElementById("flow").textContent=money(f);document.getElementById("salary").textContent=money(s.salary);document.getElementById("passive2").textContent=money(s.passive);document.getElementById("expense2").textContent=money(s.expense);document.getElementById("assets").textContent=money(s.assets);document.getElementById("debt").textContent=money(s.debt);let p=Math.min(100,s.passive/s.expense*100);document.getElementById("goal").textContent=Math.round(p)+"%";document.getElementById("bar").style.width=p+"%";document.getElementById("phase").textContent=s.phase==="rat"?"RAT RACE":"FAST TRACK";document.getElementById("log").innerHTML=s.logs.slice(-25).reverse().map(x=>"<div>"+x+"</div>").join("");board()}
+function log(x){s.logs.push(x)}
+function payday(){let f=s.salary+s.passive-s.expense;s.cash+=f;log("PAYDAY: "+money(f)+" dòng tiền tháng.")}
+function roll(){document.getElementById("roll").disabled=true;let n=1+Math.floor(Math.random()*6),old=s.pos;s.pos=(s.pos+n)%spaces.length;if(s.pos<old||spaces[s.pos][1]==="pay")payday();let type=spaces[s.pos][1];setTimeout(()=>event(type,n),350)}
+function event(type,n){
+let title="",text="",buttons=[];
+if(type==="pay"){title="PAYDAY";text="Bạn nhận dòng tiền tháng.";buttons=[["Tiếp tục","close"]]}
+if(type==="small"){title="SMALL DEAL";text="Cần $1,500 và tạo +$180 passive income/tháng.";buttons=[["Mua $1,500","small"],["Bỏ qua","close"]]}
+if(type==="big"){title="BIG DEAL";text="Cần $4,000 và tạo +$650 passive income/tháng.";buttons=[["Mua $4,000","big"],["Bỏ qua","close"]]}
+if(type==="market"){title="MARKET";text="Bạn có thể chốt một phần tài sản để lấy tiền mặt.";buttons=[["Bán tài sản +$1,000","sell"],["Giữ nguyên","close"]]}
+if(type==="doodad"){title="DOODAD";text="Món đồ tiêu dùng: $700, làm tăng chi phí $50/tháng.";buttons=[["Mua $700","doodad"],["Không mua","close"]]}
+if(type==="baby"){title="BABY";text="Chi phí gia đình tăng $250/tháng.";buttons=[["Chấp nhận","baby"]]}
+if(type==="charity"){title="CHARITY";text="Đóng $300 để nhận một lượt chơi thưởng.";buttons=[["Đóng $300","charity"],["Bỏ qua","close"]]}
+if(type==="down"){title="DOWNSIZED";text="Mất $1,000 và bỏ qua một lượt.";buttons=[["Xử lý","down"]]}
+document.getElementById("event").innerHTML=`<div class="type">ĐỔ ${n} · Ô ${s.pos+1}</div><h3>${title}</h3><p>${text}</p><div class="choices">${buttons.map(b=>`<button class="choice" onclick="act('${b[1]}')">${b[0]}</button>`).join("")}</div>`
+}
+function act(a){
+if(a==="small"){if(s.cash>=1500){s.cash-=1500;s.assets+=1500;s.passive+=180;log("Mua Small Deal: +$180/tháng")}else log("Không đủ tiền.")}
+if(a==="big"){if(s.cash>=4000){s.cash-=4000;s.assets+=4000;s.passive+=650;log("Mua Big Deal: +$650/tháng")}else log("Không đủ tiền.")}
+if(a==="sell"){let x=Math.min(1000,s.assets);s.assets-=x;s.cash+=x;s.passive=Math.max(0,s.passive-80);log("Bán tài sản: +"+money(x))}
+if(a==="doodad"){if(s.cash>=700){s.cash-=700;s.expense+=50;log("Mua Doodad: -$700, expenses +$50/tháng")}else log("Không đủ tiền.")}
+if(a==="baby"){s.expense+=250;log("Expenses +$250/tháng")}
+if(a==="charity"){if(s.cash>=300){s.cash-=300;log("Charity -$300")}else log("Không đủ tiền.")}
+if(a==="down"){s.cash=Math.max(0,s.cash-1000);log("Downsized -$1,000")}
+document.getElementById("roll").disabled=false;document.getElementById("event").innerHTML='<div class="type">XONG</div><h3>Quyết định đã ghi nhận</h3><p>Kiểm tra Financial Statement rồi gieo xúc xắc tiếp.</p>';update();
+if(s.phase==="rat"&&s.passive>=s.expense)setTimeout(fastTrack,300)
+}
+function close(){document.getElementById("roll").disabled=false;update()}
+function fastTrack(){s.phase="fast";log("Bạn đã thoát Rat Race và vào Fast Track!");document.getElementById("event").innerHTML='<div class="type">FAST TRACK</div><h3>🎯 Tự do tài chính!</h3><p>Passive income đã vượt expenses. Đây là bước chuyển sang giai đoạn tài sản lớn hơn.</p><div class="choices"><button class="choice" onclick="close()">Tiếp tục</button></div>';update()}
+function financials(){document.getElementById("modalbox").innerHTML=`<h2>Financial Statement</h2><table><tr><td>Lương</td><td>${money(s.salary)}</td></tr><tr><td>Passive Income</td><td>${money(s.passive)}</td></tr><tr><td>Expenses</td><td>${money(s.expense)}</td></tr><tr><td>Cash Flow</td><td>${money(s.salary+s.passive-s.expense)}</td></tr><tr><td>Assets</td><td>${money(s.assets)}</td></tr><tr><td>Debt</td><td>${money(s.debt)}</td></tr></table><div class="actions"><button class="btn primary" onclick="document.getElementById('modal').classList.remove('show')">Đóng</button></div>`;document.getElementById("modal").classList.add("show")}
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")e.currentTarget.classList.remove("show")};
+update();
+</script>
+</body>
+</html>
